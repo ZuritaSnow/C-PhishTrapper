@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C-PhishTrapper | Sabe en segundos si un correo es una trampa</title>
+<style>
+  :root{
+    --navy:#0f1f3a; --navy-2:#162b4f; --ink:#13213a; --muted:#5b6880; --line:#e3e8f0;
+    --bg:#f6f8fb; --white:#fff; --green:#1f9d55; --amber:#e8a317; --red:#d64545;
+    --accent:#2f6fed; --accent-soft:#e8f0ff; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .mock-note{background:#fff8e1;border-bottom:1px solid #f1d98a;color:#6b5300;font-size:13px;text-align:center;padding:8px 16px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px;text-decoration:none}
+  .logo-mark{display:flex;flex-direction:column;gap:3px;background:var(--navy);padding:6px 7px;border-radius:8px}
+  .logo-mark span{width:9px;height:9px;border-radius:50%}
+  .nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:15px;color:var(--muted)}
+  .nav ul a{text-decoration:none}
+  .nav ul a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:13px 22px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s, box-shadow .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(31,157,85,.25)}
+  .btn-secondary{background:#fff;color:var(--navy);border-color:var(--navy)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+  .btn-sm{padding:9px 16px;font-size:14px}
+
+  /* Hero */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 70%);color:#fff;padding:72px 0 84px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .eyebrow{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:13px;margin-bottom:18px}
+  .hero h1{font-size:46px;line-height:1.1;margin:0 0 18px;letter-spacing:-1px}
+  .hero h1 em{font-style:normal;color:#7fd6a3}
+  .hero p.lead{font-size:19px;color:#cfd8ea;margin:0 0 28px;max-width:540px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-small{margin-top:16px;font-size:14px;color:#a9b6cf}
+
+  /* Inbox mockup */
+  .inbox{background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 30px 60px rgba(0,0,0,.35);overflow:hidden}
+  .inbox-top{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#eef2f7;border-bottom:1px solid var(--line)}
+  .inbox-top i{width:10px;height:10px;border-radius:50%;background:#cfd6e1}
+  .inbox-top span{margin-left:8px;font-size:12px;color:var(--muted)}
+  .mail{padding:18px 20px}
+  .mail-from{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+  .mail h4{margin:6px 0 10px;font-size:17px}
+  .mail p{margin:0;font-size:14px;color:#3a4760}
+  .alert{margin:16px 20px 20px;border-radius:12px;border:2px solid var(--red);background:#fdf0f0;padding:14px 16px}
+  .alert-head{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--red);font-size:15px}
+  .light{display:flex;gap:4px;background:var(--navy);padding:4px 6px;border-radius:999px}
+  .light b{width:10px;height:10px;border-radius:50%;opacity:.25}
+  .light .g{background:var(--green)} .light .a{background:var(--amber)} .light .r{background:var(--red);opacity:1}
+  .alert ul{margin:10px 0 12px;padding-left:18px;font-size:14px}
+  .alert ul li{margin:3px 0}
+  .alert .do{font-size:14px;font-weight:700;background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #f2c4c4}
+  .alert-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .chip{font-size:12px;font-weight:700;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:#fff}
+  .chip.main{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  /* Sections */
+  section{padding:80px 0}
+  .section-head{max-width:720px;margin:0 auto 44px;text-align:center}
+  .section-head h2{font-size:34px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  .section-head p{color:var(--muted);font-size:17px;margin:0}
+  .tag{display:inline-block;color:var(--accent);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+
+  /* Problem stats */
+  .problem{background:var(--bg)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .stat .num{font-size:44px;font-weight:800;letter-spacing:-1px;color:var(--navy);line-height:1}
+  .stat .num small{font-size:20px}
+  .stat p{margin:12px 0 10px;font-size:16px}
+  .stat cite{font-size:12px;color:var(--muted);font-style:normal}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:#fff}
+  .step-n{position:absolute;top:-14px;left:24px;background:var(--navy);color:#fff;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px}
+  .step-icon{height:92px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px;margin-bottom:18px}
+  .step h3{margin:0 0 8px;font-size:19px}
+  .step p{margin:0;color:var(--muted);font-size:15px}
+  .big-light{display:flex;flex-direction:column;gap:6px;background:var(--navy);padding:8px;border-radius:14px}
+  .big-light span{width:18px;height:18px;border-radius:50%}
+  .bubble{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;max-width:200px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+  .doc-ic{width:58px;height:72px;background:#fff;border:2px solid var(--navy);border-radius:6px;position:relative}
+  .doc-ic:before{content:"";position:absolute;left:10px;right:10px;top:14px;height:4px;background:var(--line);box-shadow:0 10px 0 var(--line),0 20px 0 var(--line),0 30px 0 var(--line)}
+  .doc-ic:after{content:"✓";position:absolute;right:-12px;bottom:-10px;background:var(--green);color:#fff;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px}
+
+  /* Video */
+  .video{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .player{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#183361,#0f1f3a);display:grid;place-items:center;color:#fff;box-shadow:0 18px 40px rgba(15,31,58,.2)}
+  .play{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;cursor:pointer}
+  .play:after{content:"";border-left:24px solid var(--navy);border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:6px}
+  .player .cap{position:absolute;left:18px;bottom:16px;font-size:14px;color:#cfd8ea}
+  .player .dur{position:absolute;right:16px;bottom:16px;background:rgba(0,0,0,.5);font-size:12px;padding:3px 8px;border-radius:6px}
+  .video ul{padding-left:20px;margin:16px 0 24px}
+  .video li{margin:6px 0}
+
+  /* Compare */
+  .compare{background:var(--bg)}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:920px;margin:0 auto}
+  .cmp-col{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .cmp-col.ours{border:2px solid var(--green)}
+  .cmp-col h3{margin:0 0 14px;font-size:19px}
+  .cmp-col ul{list-style:none;margin:0;padding:0}
+  .cmp-col li{padding:9px 0 9px 30px;position:relative;border-bottom:1px dashed var(--line);font-size:15px}
+  .cmp-col li:last-child{border-bottom:0}
+  .cmp-col li:before{position:absolute;left:0;top:8px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800}
+  .cmp-col.theirs li:before{content:"✓";background:#e9edf3;color:var(--muted)}
+  .cmp-col.ours li:before{content:"+";background:var(--green);color:#fff}
+
+  /* Expediente */
+  .exp{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+  .exp-card{border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 16px 36px rgba(15,31,58,.1);background:#fff;overflow:hidden}
+  .exp-head{background:var(--navy);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+  .exp-head b{font-size:15px}
+  .exp-body{padding:18px}
+  .exp-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .exp-row span:first-child{color:var(--muted)}
+  .exp-row span:last-child{font-weight:600;text-align:right}
+  .tl{margin-top:14px;font-size:13px}
+  .tl div{display:flex;gap:10px;padding:4px 0}
+  .tl i{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:5px;flex:none}
+  .stamp{display:inline-block;margin-top:12px;font-size:12px;color:#6b5300;background:#fff8e1;border:1px solid #f1d98a;border-radius:6px;padding:4px 8px}
+  .exp h2{font-size:32px;margin:0 0 14px;letter-spacing:-.5px}
+  .exp p{color:var(--muted);font-size:17px}
+  .checks{list-style:none;padding:0;margin:18px 0 0}
+  .checks li{padding:6px 0 6px 30px;position:relative}
+  .checks li:before{content:"✓";position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:12px;font-weight:800}
+
+  /* Pricing */
+  .pricing{background:var(--bg)}
+  .toggle{display:flex;justify-content:center;gap:0;margin:-20px auto 32px;background:#fff;border:1px solid var(--line);border-radius:999px;width:max-content;padding:4px}
+  .toggle button{border:0;background:transparent;padding:9px 18px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;color:var(--muted)}
+  .toggle button.on{background:var(--navy);color:#fff}
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .plan{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;display:flex;flex-direction:column}
+  .plan.best{border:2px solid var(--green);position:relative;box-shadow:0 14px 30px rgba(31,157,85,.15)}
+  .plan.best:before{content:"Recomendado";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px}
+  .plan h3{margin:0;font-size:18px}
+  .plan .for{color:var(--muted);font-size:13px;margin:4px 0 16px;min-height:38px}
+  .price{font-size:38px;font-weight:800;letter-spacing:-1px;color:var(--navy);line-height:1}
+  .price small{display:block;margin-top:6px;font-size:14px;font-weight:600;color:var(--muted);letter-spacing:0}
+  .plan ul{list-style:none;padding:0;margin:18px 0 22px;font-size:14px;flex:1}
+  .plan li{padding:5px 0 5px 22px;position:relative}
+  .plan li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+  .fine{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+
+  /* Trust */
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .trust{border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .trust .ic{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+  .trust h3{margin:0 0 8px;font-size:18px}
+  .trust p{margin:0;color:var(--muted);font-size:15px}
+
+  /* LinkedIn mock */
+  .social{background:var(--bg)}
+  .li-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+  .li-post{background:#fff;border:1px solid #dcdfe3;border-radius:10px;max-width:520px;font-size:14px;color:#1d2226;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+  .li-top{display:flex;gap:10px;padding:14px 16px 6px}
+  .li-av{width:48px;height:48px;border-radius:8px;background:var(--navy);display:grid;place-items:center;flex:none}
+  .li-av .light{transform:rotate(90deg)}
+  .li-name{font-weight:700;font-size:14px}
+  .li-meta{color:#666;font-size:12px}
+  .li-follow{margin-left:auto;color:#0a66c2;font-weight:700;font-size:14px;white-space:nowrap}
+  .li-text{padding:6px 16px 12px;white-space:pre-line}
+  .li-text .hash{color:#0a66c2;font-weight:600}
+  .li-img{background:linear-gradient(150deg,#0f1f3a,#1b3a6b);color:#fff;padding:30px 28px;aspect-ratio:1.91/1;display:flex;flex-direction:column;justify-content:center}
+  .li-img .k{font-size:15px;color:#a9b6cf}
+  .li-img .big{font-size:40px;font-weight:800;line-height:1;margin:8px 0}
+  .li-img .big span{color:#ff8a8a}
+  .li-img .s{font-size:16px;max-width:380px}
+  .li-img .src{font-size:11px;color:#8fa0bf;margin-top:14px}
+  .li-img .brand{display:flex;align-items:center;gap:8px;margin-top:16px;font-weight:700;font-size:13px}
+  .li-bar{display:flex;justify-content:space-around;border-top:1px solid #e8e8e8;padding:6px 8px;color:#666;font-weight:600;font-size:13px}
+  .li-bar span{padding:8px 10px;border-radius:6px}
+  .social-side h2{font-size:32px;margin:0 0 12px;letter-spacing:-.5px}
+  .social-side p{color:var(--muted);font-size:17px}
+  .posts{display:grid;gap:12px;margin-top:20px}
+  .post-idea{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .post-idea b{display:block;font-size:15px;margin-bottom:3px}
+  .post-idea span{color:var(--muted);font-size:14px}
+
+  /* FAQ */
+  .faq{max-width:800px;margin:0 auto}
+  details{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:12px;background:#fff}
+  summary{font-weight:700;cursor:pointer;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";font-size:22px;line-height:1;color:var(--accent)}
+  details[open] summary:after{content:"−"}
+  details p{color:var(--muted);margin:12px 0 0}
+
+  /* Contact */
+  .contact{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff}
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+  .contact h2{font-size:36px;margin:0 0 14px;letter-spacing:-.5px}
+  .contact p{color:#cfd8ea;font-size:17px}
+  .channels{margin-top:26px;display:grid;gap:12px}
+  .channel{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:14px 16px;border-radius:12px;text-decoration:none}
+  .channel .ic{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:19px}
+  .channel small{display:block;color:#a9b6cf;font-size:13px}
+  form{background:#fff;color:var(--ink);border-radius:16px;padding:28px;box-shadow:0 24px 50px rgba(0,0,0,.3)}
+  form h3{margin:0 0 4px;font-size:21px}
+  form .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+  input,select{width:100%;padding:12px 14px;border:1px solid #cdd5e1;border-radius:10px;font-size:15px;font-family:inherit}
+  input:focus,select:focus{outline:2px solid var(--accent);border-color:transparent}
+  .consent{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);margin:16px 0}
+  .consent input{width:auto;margin-top:3px}
+  form .btn{width:100%}
+  .ok{display:none;margin-top:14px;background:#e9f7ef;border:1px solid #b9e3c9;color:#1b6b3e;border-radius:10px;padding:12px;font-size:14px}
+
+  footer{background:#0a1529;color:#8fa0bf;font-size:14px;padding:30px 0}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{color:#cfd8ea}
+
+  @media (max-width:900px){
+    .hero-grid,.video,.exp,.li-wrap,.contact-grid,.cmp{grid-template-columns:1fr}
+    .stats,.steps,.trust-grid{grid-template-columns:1fr}
+    .plans{grid-template-columns:1fr 1fr}
+    .nav ul{display:none}
+    .hero h1{font-size:36px}
+  }
+  @media (max-width:560px){ .plans,.row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="mock-note">Mockup académico. Precios de lanzamiento por validar, datos de contacto de ejemplo y correos con marcas y datos ficticios.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="C-PhishTrapper">
+      <span class="logo-mark" aria-hidden="true"><span style="background:#d64545"></span><span style="background:#e8a317"></span><span style="background:#1f9d55"></span></span>
+      C-PhishTrapper
+    </a>
+    <ul>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#expediente">Expediente</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" href="#contacto">Prueba 30 días gratis</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Para PYMEs mexicanas sin área de sistemas</span>
+      <h1>Sabe en segundos si un correo es una <em>trampa</em>. Y si alguien cae, reclama con pruebas.</h1>
+      <p class="lead">C-PhishTrapper se suma al Gmail u Outlook que ya pagas: marca cada correo con un semáforo, te explica en español por qué es sospechoso y arma el expediente para reclamar al banco y a CONDUSEF.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contacto">Prueba 30 días gratis</a>
+        <a class="btn btn-ghost" href="#contacto">Agenda una demo de 15 minutos</a>
+      </div>
+      <div class="hero-small">Sin tarjeta · Se instala en 10 minutos · No cambia tu correo</div>
+    </div>
+
+    <div class="inbox" role="img" aria-label="Ejemplo de correo falso marcado en rojo por C-PhishTrapper">
+      <div class="inbox-top"><i></i><i></i><i></i><span>Bandeja de entrada · ejemplo con datos ficticios</span></div>
+      <div class="mail">
+        <div class="mail-from"><span><b>Distribuidora Hernández</b> &lt;pagos@distrib-hernandez-mx.com&gt;</span><span>9:42</span></div>
+        <h4>Urgente: actualizamos nuestra cuenta bancaria</h4>
+        <p>Buen día. Por cambio de banco, le pedimos realizar el pago de la factura F-2231 a la nueva cuenta antes de las 2:00 p.m. de hoy para evitar recargos...</p>
+      </div>
+      <div class="alert">
+        <div class="alert-head"><span class="light" aria-hidden="true"><b class="g"></b><b class="a"></b><b class="r"></b></span> Alto: probable fraude</div>
+        <ul>
+          <li>El remitente real es <b>distrib-hernandez-mx.com</b>, no el dominio que usa tu proveedor.</li>
+          <li>Pide cambiar de cuenta y pagar hoy: dos señales típicas de fraude.</li>
+        </ul>
+        <div class="do">No transfieras. Llama a tu proveedor al número que ya tienes.</div>
+        <div class="alert-actions"><span class="chip main">Generar expediente</span><span class="chip">Ver video de 30 s</span><span class="chip">Esto es legítimo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">El problema</span>
+      <h2>El fraude por correo no avisa, y recuperar el dinero es lo más difícil</h2>
+      <p>Los filtros de tu correo bloquean mucho, pero el correo que sí llega es justo el que parece legítimo.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">4 <small>de cada</small> 10</div>
+        <p>PYMEs de Latinoamérica recibieron ataques de phishing en 2024.</p>
+        <cite>Kaspersky (2025), citado por El Universal</cite>
+      </div>
+      <div class="stat">
+        <div class="num">21 <small>segundos</small></div>
+        <p>es lo que tarda, en promedio, una persona en dar clic en un enlace falso.</p>
+        <cite>Verizon, Data Breach Investigations Report 2024</cite>
+      </div>
+      <div class="stat">
+        <div class="num">29.3<small>%</small></div>
+        <p>de lo reclamado por fraude cibernético fue lo único que bonificaron los bancos.</p>
+        <cite>CONDUSEF, fraudes cibernéticos y tradicionales</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Cómo funciona</span>
+      <h2>Tres pasos, cero configuración</h2>
+      <p>Funciona encima del correo que ya usas. No necesitas a nadie de sistemas.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-icon"><span class="big-light" aria-hidden="true"><span style="background:#d64545"></span><span style="background:#e8a317"></span><span style="background:#1f9d55"></span></span></div>
+        <h3>Semáforo en cada correo</h3>
+        <p>Verde, amarillo o rojo. Te muestra quién envió el correo en realidad, no el nombre que aparenta.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-icon"><div class="bubble">"Pide cambiar de cuenta y pagar hoy. Llama antes de transferir."</div></div>
+        <h3>Explicación en español</h3>
+        <p>Una frase clara de por qué es sospechoso y qué hacer. Más un video de 30 segundos, sin culpar a nadie.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-icon"><div class="doc-ic" aria-hidden="true"></div></div>
+        <h3>Expediente para reclamar</h3>
+        <p>Si alguien cae, con un clic arma la evidencia ordenada que piden el banco y CONDUSEF.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section style="padding-top:0">
+  <div class="wrap video">
+    <div class="player" role="img" aria-label="Video de presentación de 55 segundos">
+      <div class="play" title="Reproducir"></div>
+      <div class="cap">Míralo en acción: del correo falso al expediente</div>
+      <div class="dur">0:55</div>
+    </div>
+    <div>
+      <span class="tag">Video de 55 segundos</span>
+      <h2 style="font-size:30px;margin:0 0 8px;letter-spacing:-.5px">Mira cómo detiene una transferencia falsa</h2>
+      <ul>
+        <li>El correo del falso proveedor llega a la bandeja.</li>
+        <li>El semáforo se pone en rojo y explica por qué.</li>
+        <li>Con un clic se genera el expediente para el banco.</li>
+      </ul>
+      <a class="btn btn-secondary" href="#contacto">Quiero verlo en mi correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section class="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Complemento, no reemplazo</span>
+      <h2>Tu correo ya filtra. Nosotros cuidamos el correo que sí llega.</h2>
+    </div>
+    <div class="cmp">
+      <div class="cmp-col theirs">
+        <h3>Lo que ya te da tu correo</h3>
+        <ul>
+          <li>Filtro de spam y correos maliciosos</li>
+          <li>Bloqueo automático de amenazas conocidas</li>
+          <li>Funciones avanzadas en planes más caros, que alguien debe activar</li>
+        </ul>
+      </div>
+      <div class="cmp-col ours">
+        <h3>Lo que agrega C-PhishTrapper</h3>
+        <ul>
+          <li>Semáforo y explicación en español en cada correo</li>
+          <li>Expediente listo para reclamar al banco y a CONDUSEF</li>
+          <li>Microvideos de 30 segundos ligados a cada alerta</li>
+          <li>Reporte mensual para el dueño, sin necesitar sistemas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPEDIENTE -->
+<section id="expediente">
+  <div class="wrap exp">
+    <div class="exp-card" role="img" aria-label="Ejemplo de expediente de reclamación">
+      <div class="exp-head"><b>Expediente de reclamación</b><span>Folio de ejemplo EXP-0001</span></div>
+      <div class="exp-body">
+        <div class="exp-row"><span>Empresa</span><span>Comercializadora Ejemplo S.A. de C.V.</span></div>
+        <div class="exp-row"><span>Correo recibido</span><span>12/11/2026, 9:42</span></div>
+        <div class="exp-row"><span>Remitente real</span><span>distrib-hernandez-mx.com</span></div>
+        <div class="exp-row"><span>Verificación del remitente</span><span style="color:#d64545">No coincide con el proveedor</span></div>
+        <div class="exp-row"><span>Huella digital del mensaje</span><span>a91f…7c2e</span></div>
+        <div class="tl">
+          <div><i></i>9:42 Llega el correo y se marca en rojo</div>
+          <div><i></i>10:05 Se realiza la transferencia</div>
+          <div><i></i>10:31 Se genera el expediente</div>
+        </div>
+        <span class="stamp">Ejemplo con datos ficticios</span>
+      </div>
+    </div>
+    <div>
+      <span class="tag">Nuestro diferenciador</span>
+      <h2>Si alguien cae, no pierdes días juntando pruebas</h2>
+      <p>Hoy los bancos devuelven menos de un tercio de lo que se les reclama por fraude. Un reclamo sin evidencia ordenada es más difícil de sostener.</p>
+      <ul class="checks">
+        <li>Capturas del correo y sus encabezados</li>
+        <li>Resultado de la verificación del remitente</li>
+        <li>Huella digital del mensaje para probar que no fue alterado</li>
+        <li>Línea de tiempo de lo que pasó</li>
+        <li>Guía de qué hacer con el banco y con CONDUSEF</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="pricing" id="precios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Precios de lanzamiento</span>
+      <h2>Menos de lo que cuesta un solo pago perdido</h2>
+      <p>Pagas solo por los buzones que proteges. Precios en pesos, antes de IVA.</p>
+    </div>
+    <div class="toggle" role="group" aria-label="Periodo de pago">
+      <button type="button" class="on" data-period="anual">Pago anual</button>
+      <button type="button" data-period="mensual">Pago mensual</button>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Microempresa</h3>
+        <div class="for">Hasta 15 buzones, tarifa fija</div>
+        <div class="price"><span data-anual="690" data-mensual="790">690</span> <small>MXN al mes</small></div>
+        <ul><li>Todo lo del plan Esencial</li><li>Un solo pago para toda la empresa</li></ul>
+        <a class="btn btn-secondary" href="#contacto">Empezar prueba</a>
+      </div>
+      <div class="plan">
+        <h3>Esencial</h3>
+        <div class="for">Desde 10 buzones</div>
+        <div class="price"><span data-anual="49" data-mensual="59">49</span> <small>MXN por buzón al mes</small></div>
+        <ul><li>Semáforo y explicación en español</li><li>Botón de reporte</li><li>Expediente básico</li></ul>
+        <a class="btn btn-secondary" href="#contacto">Empezar prueba</a>
+      </div>
+      <div class="plan best">
+        <h3>Pro</h3>
+        <div class="for">Desde 10 buzones</div>
+        <div class="price"><span data-anual="65" data-mensual="79">65</span> <small>MXN por buzón al mes</small></div>
+        <ul><li>Todo lo de Esencial</li><li>Expediente completo para el banco</li><li>Consola y reporte mensual</li><li>Portal del empleado</li></ul>
+        <a class="btn btn-primary" href="#contacto">Prueba 30 días gratis</a>
+      </div>
+      <div class="plan">
+        <h3>Plus</h3>
+        <div class="for">Sin mínimo adicional</div>
+        <div class="price"><span data-anual="89" data-mensual="105">89</span> <small>MXN por buzón al mes</small></div>
+        <ul><li>Todo lo de Pro</li><li>Simulacros y microcapacitación</li><li>Soporte prioritario</li></ul>
+        <a class="btn btn-secondary" href="#contacto">Empezar prueba</a>
+      </div>
+    </div>
+    <p class="fine">Precios de lanzamiento sujetos a cambio. Expediente asistido con revisión humana: 490 MXN por caso.</p>
+  </div>
+</section>
+
+<!-- CONFIANZA -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Únete al piloto fundador</span>
+      <h2>Estamos buscando a las primeras 20 PYMEs de Puebla</h2>
+      <p>Somos un proyecto nuevo y lo decimos de frente: queremos construirlo contigo.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust"><div class="ic">🤝</div><h3>Precio de fundador</h3><p>Las primeras 20 empresas conservan su precio el primer año a cambio de compartir su experiencia.</p></div>
+      <div class="trust"><div class="ic">🔒</div><h3>Tus datos, protegidos</h3><p>Analizamos solo lo necesario para detectar fraudes, sin publicidad ni venta de datos, conforme a la Ley Federal de Protección de Datos Personales.</p></div>
+      <div class="trust"><div class="ic">💬</div><h3>Soporte humano</h3><p>En español, por WhatsApp, y en persona en Puebla si lo necesitas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKEDIN -->
+<section class="social">
+  <div class="wrap li-wrap">
+    <div class="li-post" aria-label="Vista previa de publicación en LinkedIn">
+      <div class="li-top">
+        <div class="li-av"><span class="light" aria-hidden="true"><b class="g" style="opacity:1"></b><b class="a" style="opacity:1"></b><b class="r"></b></span></div>
+        <div>
+          <div class="li-name">C-PhishTrapper</div>
+          <div class="li-meta">Ciberseguridad para PYMEs mexicanas</div>
+          <div class="li-meta">Publicación · 🌐</div>
+        </div>
+        <div class="li-follow">+ Seguir</div>
+      </div>
+      <div class="li-text">¿Su proveedor de siempre le pidió cambiar de cuenta bancaria "hoy mismo"?
+
+Así empieza el fraude del falso proveedor. Y cuando el dinero ya salió, recuperarlo es lo más difícil: de cada 100 pesos que se reclaman a los bancos por fraude cibernético, devuelven menos de 30.
+
+C-PhishTrapper le avisa con un semáforo en su Gmail u Outlook cuándo un correo es una trampa y, si alguien cae, le deja lista la evidencia para reclamar.
+
+Estamos abriendo 20 lugares de piloto gratuito para PYMEs de Puebla. 👇
+<span class="hash">#Ciberseguridad #PYMEs #Puebla #FraudeDigital #Phishing</span></div>
+      <div class="li-img">
+        <div class="k">De cada 100 pesos reclamados por fraude cibernético</div>
+        <div class="big">los bancos devuelven <span>menos de 30</span></div>
+        <div class="s">Detén el fraude antes de transferir. Y si pasa, reclama con pruebas.</div>
+        <div class="src">Fuente: CONDUSEF, bonificación de 29.3% en fraudes cibernéticos</div>
+        <div class="brand"><span class="light" aria-hidden="true"><b class="g" style="opacity:1"></b><b class="a" style="opacity:1"></b><b class="r"></b></span> c-phishtrapper · Prueba 30 días gratis</div>
+      </div>
+      <div class="li-bar"><span>👍 Recomendar</span><span>💬 Comentar</span><span>🔁 Compartir</span><span>✉️ Enviar</span></div>
+    </div>
+
+    <div class="social-side">
+      <span class="tag">Así nos verás en LinkedIn</span>
+      <h2>Contenido local, cada semana</h2>
+      <p>Publicamos para dueños de PYME y despachos contables: qué fraudes están circulando en México y cómo detenerlos.</p>
+      <div class="posts">
+        <div class="post-idea"><b>1. El dato que duele</b><span>Cuánto devuelven los bancos por fraude y por qué la evidencia importa.</span></div>
+        <div class="post-idea"><b>2. Antes y después del semáforo</b><span>El mismo correo falso, sin y con C-PhishTrapper.</span></div>
+        <div class="post-idea"><b>3. Invitación al piloto</b><span>20 lugares gratuitos para PYMEs de Puebla, con registro en esta página.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTAS -->
+<section id="preguntas">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">Preguntas frecuentes</span><h2>Lo que nos preguntan los dueños</h2></div>
+    <div class="faq">
+      <details open><summary>¿Tengo que cambiar mi correo o contratar a alguien de sistemas?</summary><p>No. Se instala en el Gmail u Outlook que ya usan, en unos 10 minutos. Nosotros te acompañamos en la instalación.</p></details>
+      <details><summary>¿Leen los correos de mi empresa?</summary><p>El análisis revisa las señales necesarias para detectar fraude (remitente, enlaces, lenguaje de urgencia). No usamos tus datos para publicidad ni los vendemos. Puedes consultar nuestro aviso de privacidad.</p></details>
+      <details><summary>Ya tengo Microsoft 365 o Google Workspace, ¿para qué lo necesito?</summary><p>Tu correo filtra mucho, pero no te explica el correo que sí llega ni te ayuda a reclamar si alguien cae. Nos sumamos a lo que ya pagas, no lo reemplazamos.</p></details>
+      <details><summary>¿El expediente garantiza que el banco me devuelva el dinero?</summary><p>No. Ningún documento lo garantiza. El expediente reúne y ordena la evidencia que piden el banco y CONDUSEF para que tu reclamo sea más claro y rápido de revisar.</p></details>
+      <details><summary>Ya me robaron, ¿me sirve?</summary><p>Sí. Escríbenos por WhatsApp: te orientamos sobre los primeros pasos con el banco y, con el expediente asistido, revisamos tu caso antes de presentarlo.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact" id="contacto">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Pruébalo 30 días gratis en tu empresa</h2>
+      <p>Instalamos C-PhishTrapper en 3 buzones de tu equipo de pagos. Al final te entregamos un reporte con cada correo sospechoso que recibió tu empresa.</p>
+      <div class="channels">
+        <a class="channel" href="#contacto"><span class="ic">💬</span><span>WhatsApp: 222 000 0000<small>Número de ejemplo · Respuesta el mismo día hábil</small></span></a>
+        <a class="channel" href="#contacto"><span class="ic">✉️</span><span>hola@cphishtrapper.mx<small>Correo de ejemplo · Facturación y soporte</small></span></a>
+        <a class="channel" href="#contacto"><span class="ic">📍</span><span>Puebla, Puebla<small>Demos en persona en la zona metropolitana</small></span></a>
+      </div>
+    </div>
+
+    <form id="lead-form" novalidate>
+      <h3>Solicita tu piloto gratuito</h3>
+      <p class="sub">Te contactamos en menos de 24 horas para agendar la instalación.</p>
+      <div class="row">
+        <div><label for="n">Nombre</label><input id="n" placeholder="Ricardo Pérez" required></div>
+        <div><label for="e">Empresa</label><input id="e" placeholder="Nombre de tu empresa" required></div>
+      </div>
+      <div class="row">
+        <div><label for="b">Buzones de correo</label>
+          <select id="b"><option>Menos de 11</option><option selected>11 a 15</option><option>16 a 50</option><option>Más de 50</option></select></div>
+        <div><label for="c">Tu correo usa</label>
+          <select id="c"><option>Gmail / Google Workspace</option><option>Outlook / Microsoft 365</option><option>Otro</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="m">Correo</label><input id="m" type="email" placeholder="tu@empresa.com" required></div>
+        <div><label for="w">WhatsApp</label><input id="w" type="tel" placeholder="222 000 0000"></div>
+      </div>
+      <label class="consent"><input type="checkbox" required> Acepto el aviso de privacidad y que me contacten por WhatsApp o correo.</label>
+      <button class="btn btn-primary" type="submit">Quiero mi piloto gratuito</button>
+      <div class="ok" id="ok">¡Gracias! Es un mockup: en la versión real, aquí se registraría tu solicitud.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 C-PhishTrapper · Proyecto de emprendimiento</span>
+    <span><a href="#contacto">Aviso de privacidad</a> · <a href="#contacto">Términos</a> · <a href="#preguntas">Preguntas frecuentes</a></span>
+  </div>
+</footer>
+
+<script>
+  // Cambio de precios anual / mensual
+  document.querySelectorAll('.toggle button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.toggle button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var p = b.getAttribute('data-period');
+      document.querySelectorAll('.price span[data-anual]').forEach(function(s){ s.textContent = s.getAttribute('data-' + p); });
+    });
+  });
+  // Formulario de demostración
+  document.getElementById('lead-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('ok').style.display = 'block';
+  });
+</script>
+</body>
+</html>

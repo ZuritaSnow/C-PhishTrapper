@@ -1,0 +1,43 @@
+/* =========================================================
+   C-PhishTrapper · Landing v3
+   Estilos propios (el resto viene de Tailwind vía CDN)
+   ========================================================= */
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+  /* Compensa el header fijo (h-20 = 5rem) al navegar con anclas */
+  scroll-padding-top: 5rem;
+}
+
+body { margin: 0; }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #fafaf0; }
+::-webkit-scrollbar-thumb {
+  background: #8db6b0;
+  border-radius: 4px;
+}
+
+/* ---------- Utilidades ---------- */
+
+/* Ícono de Material Symbols relleno */
+.icon-filled { font-variation-settings: 'FILL' 1; }
+
+/* Ilustración pixel art del hero */
+.hero-art {
+  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTtX20Y06J4jlcVY9YXih2paMw8s09BOgCmtaU3uY4uttj9iM5-KkZCZFW9RKETCkL3ipvSC2VFOb5zz1YazTuLgzfFnvyJF4SBqO10oQ33EE44t1QxuVnRUXNCulsAcOTJlI8nryAW1ZmpcDdLwBwHLts1fRD8V7Y2m_ZYsD7MJb0ZtCq3r6KzxeSskSD3B3QE43VuQsSBmsqQBx4wvDnZh5fcWKAZ7JHbNefeJZw4ho40zgk-nTs');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Texto de la publicación de LinkedIn: respeta saltos de línea */
+.li-text { white-space: pre-line; }
+
+/* ---------- FAQ con <details> ---------- */
+.faq-item summary { list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item .faq-icon { transition: transform .3s; }
+.faq-item[open] .faq-icon { transform: rotate(180deg); }

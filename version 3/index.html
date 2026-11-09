@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C-PhishTrapper | Sabe en segundos si un correo es una trampa</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap">
+
+  <!-- Tailwind (CDN) + configuración del tema -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind.config.js"></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Lógica de la página -->
+  <script src="js/main.js" defer></script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- Aviso de mockup -->
+  <div class="bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm text-center px-4 py-2">
+    Mockup académico. Precios de lanzamiento por validar, datos de contacto de ejemplo y correos con marcas y datos ficticios.
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(31,59,56,0.06)]">
+    <div class="h-20 max-w-7xl mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
+      <a class="flex items-center gap-space-sm group" href="#inicio" aria-label="C-PhishTrapper, ir al inicio">
+        <img alt="" class="w-9 h-9 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDta4TVkrCLzK5ufkOxEOCs7JrywDkAiugcBOWuokreh5kh_XL98UhqI_CDUTj03fsKJl6ieyLnUMPhgIVqGhJ1CA9vbUEEVdeDpJaSi2fXxNcwZDXy78KXZ3syzqXv2CZ8leeHghlpwzUOYZUo8EteUVNTAb2Xg-JDoY95Bduotxo3oFtguD-Y2szvciL2spsxQ-CiGTyfWkG32tU6A8NYHdy12y1nQQ1VXOzIdw1SPpV6dYEcPmYad_DQekYRy_-_zQ">
+        <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold group-hover:opacity-90">C-PhishTrapper</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-space-lg">
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#como-funciona">Cómo funciona</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#expediente">Expediente</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#precios">Precios</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#preguntas">Preguntas</a>
+      </nav>
+
+      <a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-sm bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-semibold rounded-full shadow-[0_4px_14px_rgba(252,143,142,0.35)] transition-all duration-200 hover:shadow-none" href="#contacto">
+        Prueba 30 días gratis
+      </a>
+    </div>
+  </header>
+
+  <main class="w-full bg-surface">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="relative w-full overflow-hidden bg-surface py-12 md:py-20 lg:py-24" id="inicio">
+      <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary/5 via-transparent to-primary/10"></div>
+      <div class="absolute -top-32 right-1/4 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+
+          <!-- Texto y CTAs -->
+          <div class="lg:col-span-7 space-y-space-lg">
+            <div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container text-label-sm font-label-sm uppercase tracking-widest shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+              Para PYMEs mexicanas sin área de sistemas
+            </div>
+
+            <h1 class="font-display text-headline-lg-mobile md:text-display tracking-tight text-primary leading-tight font-extrabold">
+              Sabe en segundos si un correo es una
+              <span class="text-tertiary-container relative inline-block">
+                trampa
+                <svg class="absolute -bottom-2 left-0 w-full h-2.5 text-tertiary/30" preserveAspectRatio="none" viewBox="0 0 100 12" aria-hidden="true">
+                  <path d="M0,5 Q25,12 50,5 T100,6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
+                </svg>
+              </span>.
+              Y si alguien cae, reclama con pruebas.
+            </h1>
+
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              C-PhishTrapper se suma al Gmail u Outlook que ya pagas: marca cada correo con un semáforo, te explica en español por qué es sospechoso y arma el expediente para reclamar al banco y a CONDUSEF.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-space-md pt-2">
+              <a class="inline-flex items-center justify-center gap-space-xs px-8 py-4 bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-md font-bold rounded-full shadow-[0_6px_20px_rgba(252,143,142,0.4)] transition-all duration-200 transform hover:-translate-y-0.5" href="#contacto">
+                <span>Prueba 30 días gratis</span>
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </a>
+              <a class="inline-flex items-center justify-center gap-space-xs px-7 py-4 bg-primary-container/30 hover:bg-primary-container/50 text-on-primary-container font-headline-sm text-body-md font-semibold rounded-full shadow-sm transition-all duration-200" href="#contacto">
+                <span class="material-symbols-outlined text-[20px] text-primary">calendar_month</span>
+                <span>Agenda una demo de 15 minutos</span>
+              </a>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 text-on-surface-variant">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[20px]">credit_card_off</span>
+                <span class="font-body-sm text-body-sm font-medium">Sin tarjeta</span>
+              </div>
+              <span class="text-outline-variant">•</span>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[20px]">schedule</span>
+                <span class="font-body-sm text-body-sm font-medium">Se instala en 10 minutos</span>
+              </div>
+              <span class="text-outline-variant">•</span>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[20px]">mark_email_read</span>
+                <span class="font-body-sm text-body-sm font-medium">No cambia tu correo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ilustración + correo marcado -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative w-full rounded-2xl bg-surface-container-low p-4 shadow-[0_12px_32px_rgba(31,59,56,0.08)] overflow-hidden">
+
+              <div class="hero-art w-full h-48 rounded-xl overflow-hidden relative shadow-inner" role="img" aria-label="Lago en pixel art con un pescador al amanecer">
+                <div class="absolute top-2 left-3 px-2.5 py-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-code-badge text-code-badge flex items-center gap-1.5 backdrop-blur-sm">
+                  <span class="material-symbols-outlined text-[14px]">inbox</span>
+                  <span>Bandeja de entrada · datos ficticios</span>
+                </div>
+              </div>
+
+              <div class="relative -mt-10 mx-2 bg-surface-container-lowest rounded-xl p-5 shadow-[0_12px_28px_rgba(31,59,56,0.12)]" role="img" aria-label="Ejemplo de correo falso marcado en rojo por C-PhishTrapper">
+                <!-- Correo -->
+                <div class="flex items-center justify-between gap-3 text-xs text-on-surface-variant">
+                  <span class="truncate"><b class="text-on-surface">Distribuidora Hernández</b> &lt;pagos@distrib-hernandez-mx.com&gt;</span>
+                  <span class="font-code-badge text-code-badge text-outline shrink-0">9:42</span>
+                </div>
+                <h4 class="font-headline-sm text-body-md font-bold text-on-surface mt-1.5">Urgente: actualizamos nuestra cuenta bancaria</h4>
+                <p class="text-on-surface-variant text-xs leading-relaxed mt-1 line-clamp-2">
+                  Buen día. Por cambio de banco, le pedimos realizar el pago de la factura F-2231 a la nueva cuenta antes de las 2:00 p.m. de hoy para evitar recargos...
+                </p>
+
+                <!-- Alerta -->
+                <div class="mt-4 rounded-xl bg-tertiary-fixed/60 border border-tertiary-container p-3.5">
+                  <div class="flex items-center gap-2.5 font-bold text-tertiary text-body-sm">
+                    <span class="inline-flex gap-1 bg-inverse-surface px-1.5 py-1 rounded-full" aria-hidden="true">
+                      <span class="w-2.5 h-2.5 rounded-full bg-signal-green opacity-25"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-signal-amber opacity-25"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-signal-red"></span>
+                    </span>
+                    Alto: probable fraude
+                  </div>
+                  <ul class="mt-2 space-y-1 text-xs text-on-surface-variant list-disc pl-4">
+                    <li>El remitente real es <b class="text-on-surface">distrib-hernandez-mx.com</b>, no el dominio que usa tu proveedor.</li>
+                    <li>Pide cambiar de cuenta y pagar hoy: dos señales típicas de fraude.</li>
+                  </ul>
+                  <div class="mt-2.5 px-2.5 py-2 bg-surface-container-lowest rounded-lg text-xs font-bold text-on-tertiary-fixed-variant">
+                    No transfieras. Llama a tu proveedor al número que ya tienes.
+                  </div>
+                  <div class="mt-2.5 flex flex-wrap gap-1.5 text-[11px] font-bold">
+                    <span class="px-2.5 py-1 rounded-full bg-primary text-on-primary">Generar expediente</span>
+                    <span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface-variant">Ver video de 30 s</span>
+                    <span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface-variant">Esto es legítimo</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROBLEMA ===================== -->
+    <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin mb-16 relative z-20">
+      <div class="bg-inverse-surface text-inverse-on-surface rounded-2xl p-6 md:p-10 shadow-[0_16px_36px_rgba(31,59,56,0.16)]">
+        <div class="max-w-2xl mb-8 space-y-2">
+          <div class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-container">El problema</div>
+          <h2 class="font-headline-md text-headline-sm md:text-headline-md font-bold text-surface-bright">
+            El fraude por correo no avisa, y recuperar el dinero es lo más difícil
+          </h2>
+          <p class="font-body-sm text-body-sm text-inverse-on-surface/80">
+            Los filtros de tu correo bloquean mucho, pero el correo que sí llega es justo el que parece legítimo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-outline/30">
+          <div class="pt-2 md:pt-0">
+            <div class="font-display text-headline-lg font-bold text-secondary-container">4 <span class="text-body-lg">de cada</span> 10</div>
+            <p class="font-body-sm text-body-sm text-inverse-on-surface/90 mt-2">PYMEs de Latinoamérica recibieron ataques de phishing en 2024.</p>
+            <cite class="block not-italic font-label-sm text-label-sm text-inverse-on-surface/60 mt-2">Kaspersky (2025), citado por El Universal</cite>
+          </div>
+          <div class="pt-6 md:pt-0 md:pl-8">
+            <div class="font-display text-headline-lg font-bold text-primary-fixed">21 <span class="text-body-lg">segundos</span></div>
+            <p class="font-body-sm text-body-sm text-inverse-on-surface/90 mt-2">es lo que tarda, en promedio, una persona en dar clic en un enlace falso.</p>
+            <cite class="block not-italic font-label-sm text-label-sm text-inverse-on-surface/60 mt-2">Verizon, Data Breach Investigations Report 2024</cite>
+          </div>
+          <div class="pt-6 md:pt-0 md:pl-8">
+            <div class="font-display text-headline-lg font-bold text-tertiary-container">29.3<span class="text-body-lg">%</span></div>
+            <p class="font-body-sm text-body-sm text-inverse-on-surface/90 mt-2">de lo reclamado por fraude cibernético fue lo único que bonificaron los bancos.</p>
+            <cite class="block not-italic font-label-sm text-label-sm text-inverse-on-surface/60 mt-2">CONDUSEF, fraudes cibernéticos y tradicionales</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CÓMO FUNCIONA ===================== -->
+    <section class="w-full bg-surface-container-low py-16 md:py-24" id="como-funciona">
+      <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+              <span>Cómo funciona</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+              Tres pasos, cero configuración
+            </h2>
+          </div>
+          <p class="font-body-md text-on-surface-variant max-w-md">
+            Funciona encima del correo que ya usas. No necesitas a nadie de sistemas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+          <!-- Paso 1 -->
+          <div class="bg-surface rounded-2xl p-8 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-headline-sm">1</div>
+              <span class="flex flex-col gap-1 bg-inverse-surface p-1.5 rounded-xl" aria-hidden="true">
+                <span class="w-3.5 h-3.5 rounded-full bg-signal-red"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-signal-amber"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-signal-green"></span>
+              </span>
+            </div>
+            <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">Semáforo en cada correo</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+              Verde, amarillo o rojo. Te muestra quién envió el correo en realidad, no el nombre que aparenta.
+            </p>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="bg-surface rounded-2xl p-8 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-headline-sm">2</div>
+              <span class="material-symbols-outlined text-[32px] text-primary">translate</span>
+            </div>
+            <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">Explicación en español</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed mb-5">
+              Una frase clara de por qué es sospechoso y qué hacer. Más un video de 30 segundos, sin culpar a nadie.
+            </p>
+            <div class="px-3 py-2 rounded-xl bg-surface-container text-xs text-on-surface-variant italic">
+              "Pide cambiar de cuenta y pagar hoy. Llama antes de transferir."
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="bg-surface rounded-2xl p-8 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-headline-sm">3</div>
+              <span class="material-symbols-outlined text-[32px] text-tertiary">assignment_turned_in</span>
+            </div>
+            <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">Expediente para reclamar</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+              Si alguien cae, con un clic arma la evidencia ordenada que piden el banco y CONDUSEF.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMPARATIVA ===================== -->
+    <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24">
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider">
+          <span class="material-symbols-outlined text-[14px]">extension</span>
+          <span>Complemento, no reemplazo</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+          Tu correo ya filtra. Nosotros cuidamos el correo que sí llega.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg max-w-4xl mx-auto">
+        <div class="bg-surface-container-low rounded-2xl p-8">
+          <h3 class="font-headline-sm text-body-lg font-bold text-on-surface-variant mb-5">Lo que ya te da tu correo</h3>
+          <ul class="space-y-3.5 text-body-sm text-on-surface-variant">
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-outline">check</span><span>Filtro de spam y correos maliciosos</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-outline">check</span><span>Bloqueo automático de amenazas conocidas</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-outline">check</span><span>Funciones avanzadas en planes más caros, que alguien debe activar</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-[0_12px_36px_rgba(62,101,96,0.18)] border-2 border-secondary-fixed-dim">
+          <h3 class="font-headline-sm text-body-lg font-bold text-primary mb-5">Lo que agrega C-PhishTrapper</h3>
+          <ul class="space-y-3.5 text-body-sm text-on-surface">
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">add_circle</span><span>Semáforo y explicación en español en cada correo</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">add_circle</span><span>Expediente listo para reclamar al banco y a CONDUSEF</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">add_circle</span><span>Microvideos de 30 segundos ligados a cada alerta</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">add_circle</span><span>Reporte mensual para el dueño, sin necesitar sistemas</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPEDIENTE ===================== -->
+    <section class="w-full bg-surface-container-low py-16 md:py-24" id="expediente">
+      <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 lg:grid-cols-2 gap-space-xl items-center">
+
+        <!-- Tarjeta de ejemplo -->
+        <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_16px_36px_rgba(31,59,56,0.12)]" role="img" aria-label="Ejemplo de expediente de reclamación">
+          <div class="bg-inverse-surface text-inverse-on-surface px-5 py-4 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2 font-bold text-body-sm">
+              <span class="material-symbols-outlined text-[20px] text-secondary-container">folder_shared</span>
+              Expediente de reclamación
+            </div>
+            <span class="font-code-badge text-code-badge text-inverse-on-surface/70">EXP-0001</span>
+          </div>
+          <div class="p-5 text-xs">
+            <div class="flex justify-between gap-3 py-2 border-b border-surface-container"><span class="text-on-surface-variant">Empresa</span><span class="font-semibold text-right">Comercializadora Ejemplo S.A. de C.V.</span></div>
+            <div class="flex justify-between gap-3 py-2 border-b border-surface-container"><span class="text-on-surface-variant">Correo recibido</span><span class="font-semibold text-right">12/11/2026, 9:42</span></div>
+            <div class="flex justify-between gap-3 py-2 border-b border-surface-container"><span class="text-on-surface-variant">Remitente real</span><span class="font-semibold text-right">distrib-hernandez-mx.com</span></div>
+            <div class="flex justify-between gap-3 py-2 border-b border-surface-container"><span class="text-on-surface-variant">Verificación del remitente</span><span class="font-semibold text-right text-tertiary">No coincide con el proveedor</span></div>
+            <div class="flex justify-between gap-3 py-2 border-b border-surface-container"><span class="text-on-surface-variant">Huella digital del mensaje</span><span class="font-code-badge text-right">a91f…7c2e</span></div>
+
+            <div class="mt-4 space-y-2">
+              <div class="flex items-center gap-2.5"><span class="w-2.5 h-2.5 rounded-full bg-tertiary-container shrink-0"></span>9:42 Llega el correo y se marca en rojo</div>
+              <div class="flex items-center gap-2.5"><span class="w-2.5 h-2.5 rounded-full bg-signal-amber shrink-0"></span>10:05 Se realiza la transferencia</div>
+              <div class="flex items-center gap-2.5"><span class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></span>10:31 Se genera el expediente</div>
+            </div>
+
+            <span class="inline-block mt-4 px-2.5 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-code-badge text-code-badge">Ejemplo con datos ficticios</span>
+          </div>
+        </div>
+
+        <!-- Texto -->
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">star</span>
+            <span>Nuestro diferenciador</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+            Si alguien cae, no pierdes días juntando pruebas
+          </h2>
+          <p class="font-body-md text-on-surface-variant leading-relaxed">
+            Hoy los bancos devuelven menos de un tercio de lo que se les reclama por fraude. Un reclamo sin evidencia ordenada es más difícil de sostener.
+          </p>
+          <ul class="space-y-3 pt-2 text-body-sm text-on-surface">
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Capturas del correo y sus encabezados</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Resultado de la verificación del remitente</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Huella digital del mensaje para probar que no fue alterado</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Línea de tiempo de lo que pasó</span></li>
+            <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Guía de qué hacer con el banco y con CONDUSEF</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== PRECIOS ===================== -->
+    <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24" id="precios">
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+          <span>Precios de lanzamiento</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+          Menos de lo que cuesta un solo pago perdido
+        </h2>
+        <p class="font-body-md text-on-surface-variant">
+          Pagas solo por los buzones que proteges. Precios en pesos, antes de IVA.
+        </p>
+
+        <!-- Interruptor mensual / anual -->
+        <div class="pt-4 flex items-center justify-center gap-3">
+          <span class="font-body-sm text-body-sm text-on-surface-variant transition-colors" id="label-monthly">Pago mensual</span>
+          <button class="relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" id="billing-toggle" role="switch" type="button" aria-checked="true" aria-label="Pago anual">
+            <span class="pointer-events-none inline-block h-6 w-6 transform rounded-full bg-surface-container-lowest shadow ring-0 transition duration-200 ease-in-out translate-x-7" id="billing-toggle-dot"></span>
+          </button>
+          <span class="font-body-sm text-body-sm font-bold text-primary transition-colors" id="label-annual">Pago anual</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg items-stretch">
+
+        <!-- Microempresa -->
+        <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Microempresa</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6 min-h-[40px]">Hasta 15 buzones, tarifa fija</p>
+            <div class="mb-6">
+              <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-anual="690" data-mensual="790">690</span>
+              <span class="block text-on-surface-variant font-body-sm text-body-sm mt-1">MXN al mes</span>
+            </div>
+            <ul class="space-y-3 mb-8 text-body-sm text-on-surface-variant">
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Todo lo del plan Esencial</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Un solo pago para toda la empresa</span></li>
+            </ul>
+          </div>
+          <a class="w-full py-3.5 px-6 rounded-full bg-primary-container/30 hover:bg-primary-container/50 text-on-primary-container font-headline-sm text-body-sm font-bold text-center transition-all" href="#contacto">
+            Empezar prueba
+          </a>
+        </div>
+
+        <!-- Esencial -->
+        <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Esencial</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6 min-h-[40px]">Desde 10 buzones</p>
+            <div class="mb-6">
+              <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-anual="49" data-mensual="59">49</span>
+              <span class="block text-on-surface-variant font-body-sm text-body-sm mt-1">MXN por buzón al mes</span>
+            </div>
+            <ul class="space-y-3 mb-8 text-body-sm text-on-surface-variant">
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Semáforo y explicación en español</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Botón de reporte</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Expediente básico</span></li>
+            </ul>
+          </div>
+          <a class="w-full py-3.5 px-6 rounded-full bg-primary-container/30 hover:bg-primary-container/50 text-on-primary-container font-headline-sm text-body-sm font-bold text-center transition-all" href="#contacto">
+            Empezar prueba
+          </a>
+        </div>
+
+        <!-- Pro (recomendado) -->
+        <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_12px_36px_rgba(62,101,96,0.18)] relative flex flex-col justify-between transform lg:-translate-y-3">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider shadow-sm whitespace-nowrap">
+            Recomendado
+          </div>
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-primary font-bold mt-2">Pro</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6 min-h-[40px]">Desde 10 buzones</p>
+            <div class="mb-6">
+              <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-anual="65" data-mensual="79">65</span>
+              <span class="block text-on-surface-variant font-body-sm text-body-sm mt-1">MXN por buzón al mes</span>
+            </div>
+            <ul class="space-y-3 mb-8 text-body-sm text-on-surface-variant">
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span class="font-semibold text-on-surface">Todo lo de Esencial</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Expediente completo para el banco</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Consola y reporte mensual</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Portal del empleado</span></li>
+            </ul>
+          </div>
+          <a class="w-full py-4 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_6px_20px_rgba(252,143,142,0.45)] transition-all" href="#contacto">
+            Prueba 30 días gratis
+          </a>
+        </div>
+
+        <!-- Plus -->
+        <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Plus</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6 min-h-[40px]">Sin mínimo adicional</p>
+            <div class="mb-6">
+              <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-anual="89" data-mensual="105">89</span>
+              <span class="block text-on-surface-variant font-body-sm text-body-sm mt-1">MXN por buzón al mes</span>
+            </div>
+            <ul class="space-y-3 mb-8 text-body-sm text-on-surface-variant">
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span class="font-semibold text-on-surface">Todo lo de Pro</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Simulacros y microcapacitación</span></li>
+              <li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Soporte prioritario</span></li>
+            </ul>
+          </div>
+          <a class="w-full py-3.5 px-6 rounded-full bg-primary-container/30 hover:bg-primary-container/50 text-on-primary-container font-headline-sm text-body-sm font-bold text-center transition-all" href="#contacto">
+            Empezar prueba
+          </a>
+        </div>
+
+      </div>
+
+      <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-8">
+        Precios de lanzamiento sujetos a cambio. Expediente asistido con revisión humana: 490 MXN por caso.
+      </p>
+    </section>
+
+    <!-- ===================== CONFIANZA / PILOTO ===================== -->
+    <section class="w-full bg-surface-container-low py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">nature</span>
+            <span>Únete al piloto fundador</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+            Estamos buscando a las primeras 20 PYMEs de Puebla
+          </h2>
+          <p class="font-body-md text-on-surface-variant">
+            Somos un proyecto nuevo y lo decimos de frente: queremos construirlo contigo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+              <span class="material-symbols-outlined text-[28px]">handshake</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Precio de fundador</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+              Las primeras 20 empresas conservan su precio el primer año a cambio de compartir su experiencia.
+            </p>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+              <span class="material-symbols-outlined text-[28px]">lock</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Tus datos, protegidos</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+              Analizamos solo lo necesario para detectar fraudes, sin publicidad ni venta de datos, conforme a la Ley Federal de Protección de Datos Personales.
+            </p>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+              <span class="material-symbols-outlined text-[28px]">support_agent</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Soporte humano</h3>
+            <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+              En español, por WhatsApp, y en persona en Puebla si lo necesitas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LINKEDIN ===================== -->
+    <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl items-start">
+
+        <!-- Vista previa de la publicación -->
+        <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(31,59,56,0.1)] max-w-xl text-body-sm text-on-surface" aria-label="Vista previa de publicación en LinkedIn">
+          <div class="flex items-start gap-3 px-5 pt-5 pb-2">
+            <img alt="" class="w-12 h-12 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDta4TVkrCLzK5ufkOxEOCs7JrywDkAiugcBOWuokreh5kh_XL98UhqI_CDUTj03fsKJl6ieyLnUMPhgIVqGhJ1CA9vbUEEVdeDpJaSi2fXxNcwZDXy78KXZ3syzqXv2CZ8leeHghlpwzUOYZUo8EteUVNTAb2Xg-JDoY95Bduotxo3oFtguD-Y2szvciL2spsxQ-CiGTyfWkG32tU6A8NYHdy12y1nQQ1VXOzIdw1SPpV6dYEcPmYad_DQekYRy_-_zQ">
+            <div>
+              <div class="font-bold">C-PhishTrapper</div>
+              <div class="text-xs text-on-surface-variant">Ciberseguridad para PYMEs mexicanas</div>
+              <div class="text-xs text-on-surface-variant">Publicación · 🌐</div>
+            </div>
+            <div class="ml-auto font-bold text-primary whitespace-nowrap">+ Seguir</div>
+          </div>
+
+          <div class="li-text px-5 pb-4 leading-relaxed">¿Su proveedor de siempre le pidió cambiar de cuenta bancaria "hoy mismo"?
+
+Así empieza el fraude del falso proveedor. Y cuando el dinero ya salió, recuperarlo es lo más difícil: de cada 100 pesos que se reclaman a los bancos por fraude cibernético, devuelven menos de 30.
+
+C-PhishTrapper le avisa con un semáforo en su Gmail u Outlook cuándo un correo es una trampa y, si alguien cae, le deja lista la evidencia para reclamar.
+
+Estamos abriendo 20 lugares de piloto gratuito para PYMEs de Puebla. 👇
+<span class="text-primary font-semibold">#Ciberseguridad #PYMEs #Puebla #FraudeDigital #Phishing</span></div>
+
+          <!-- Imagen de la publicación -->
+          <div class="relative bg-inverse-surface text-inverse-on-surface px-7 py-8 aspect-[1.91/1] flex flex-col justify-center overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none" aria-hidden="true">
+              <svg fill="currentColor" height="180" viewBox="0 0 160 120" width="240">
+                <rect height="20" width="20" x="70" y="20"></rect>
+                <rect height="20" width="60" x="50" y="40"></rect>
+                <rect height="20" width="100" x="30" y="60"></rect>
+                <rect height="20" width="140" x="10" y="80"></rect>
+                <rect height="20" width="20" x="70" y="100"></rect>
+              </svg>
+            </div>
+            <div class="relative">
+              <div class="text-body-sm text-inverse-on-surface/70">De cada 100 pesos reclamados por fraude cibernético</div>
+              <div class="font-display text-headline-md md:text-headline-lg font-extrabold leading-tight my-2 text-surface-bright">
+                los bancos devuelven <span class="text-tertiary-container">menos de 30</span>
+              </div>
+              <div class="text-body-sm max-w-sm">Detén el fraude antes de transferir. Y si pasa, reclama con pruebas.</div>
+              <div class="font-label-sm text-label-sm text-inverse-on-surface/60 mt-3">Fuente: CONDUSEF, bonificación de 29.3% en fraudes cibernéticos</div>
+              <div class="flex items-center gap-2 mt-4 font-bold text-xs">
+                <span class="inline-flex gap-1 bg-surface-container-lowest/10 px-1.5 py-1 rounded-full" aria-hidden="true">
+                  <span class="w-2.5 h-2.5 rounded-full bg-signal-green"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-signal-amber"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-signal-red"></span>
+                </span>
+                c-phishtrapper · Prueba 30 días gratis
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-around px-2 py-2 text-xs font-semibold text-on-surface-variant border-t border-surface-container">
+            <span class="px-2 py-2">👍 Recomendar</span>
+            <span class="px-2 py-2">💬 Comentar</span>
+            <span class="px-2 py-2">🔁 Compartir</span>
+            <span class="px-2 py-2">✉️ Enviar</span>
+          </div>
+        </div>
+
+        <!-- Plan de contenido -->
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">campaign</span>
+            <span>Así nos verás en LinkedIn</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight font-bold">
+            Contenido local, cada semana
+          </h2>
+          <p class="font-body-md text-on-surface-variant leading-relaxed">
+            Publicamos para dueños de PYME y despachos contables: qué fraudes están circulando en México y cómo detenerlos.
+          </p>
+          <div class="grid gap-3 pt-2">
+            <div class="bg-surface-container-low rounded-xl p-4">
+              <b class="block font-headline-sm text-body-md text-on-surface">1. El dato que duele</b>
+              <span class="text-body-sm text-on-surface-variant">Cuánto devuelven los bancos por fraude y por qué la evidencia importa.</span>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-4">
+              <b class="block font-headline-sm text-body-md text-on-surface">2. Antes y después del semáforo</b>
+              <span class="text-body-sm text-on-surface-variant">El mismo correo falso, sin y con C-PhishTrapper.</span>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-4">
+              <b class="block font-headline-sm text-body-md text-on-surface">3. Invitación al piloto</b>
+              <span class="text-body-sm text-on-surface-variant">20 lugares gratuitos para PYMEs de Puebla, con registro en esta página.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== PREGUNTAS FRECUENTES ===================== -->
+    <section class="w-full bg-surface-container-low py-16 md:py-24" id="preguntas">
+      <div class="max-w-3xl mx-auto px-margin-mobile md:px-margin">
+        <div class="text-center mb-10 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[15px]">help_center</span>
+            <span>Preguntas frecuentes</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary font-bold tracking-tight">
+            Lo que nos preguntan los dueños
+          </h2>
+        </div>
+
+        <div class="space-y-3">
+          <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm" open>
+            <summary class="cursor-pointer p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary">
+              <span>¿Tengo que cambiar mi correo o contratar a alguien de sistemas?</span>
+              <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+            </summary>
+            <p class="px-5 pb-5 text-on-surface-variant font-body-sm leading-relaxed">No. Se instala en el Gmail u Outlook que ya usan, en unos 10 minutos. Nosotros te acompañamos en la instalación.</p>
+          </details>
+
+          <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm">
+            <summary class="cursor-pointer p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary">
+              <span>¿Leen los correos de mi empresa?</span>
+              <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+            </summary>
+            <p class="px-5 pb-5 text-on-surface-variant font-body-sm leading-relaxed">El análisis revisa las señales necesarias para detectar fraude (remitente, enlaces, lenguaje de urgencia). No usamos tus datos para publicidad ni los vendemos. Puedes consultar nuestro aviso de privacidad.</p>
+          </details>
+
+          <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm">
+            <summary class="cursor-pointer p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary">
+              <span>Ya tengo Microsoft 365 o Google Workspace, ¿para qué lo necesito?</span>
+              <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+            </summary>
+            <p class="px-5 pb-5 text-on-surface-variant font-body-sm leading-relaxed">Tu correo filtra mucho, pero no te explica el correo que sí llega ni te ayuda a reclamar si alguien cae. Nos sumamos a lo que ya pagas, no lo reemplazamos.</p>
+          </details>
+
+          <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm">
+            <summary class="cursor-pointer p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary">
+              <span>¿El expediente garantiza que el banco me devuelva el dinero?</span>
+              <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+            </summary>
+            <p class="px-5 pb-5 text-on-surface-variant font-body-sm leading-relaxed">No. Ningún documento lo garantiza. El expediente reúne y ordena la evidencia que piden el banco y CONDUSEF para que tu reclamo sea más claro y rápido de revisar.</p>
+          </details>
+
+          <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 shadow-sm">
+            <summary class="cursor-pointer p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary">
+              <span>Ya me robaron, ¿me sirve?</span>
+              <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+            </summary>
+            <p class="px-5 pb-5 text-on-surface-variant font-body-sm leading-relaxed">Sí. Escríbenos por WhatsApp: te orientamos sobre los primeros pasos con el banco y, con el expediente asistido, revisamos tu caso antes de presentarlo.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
+    <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24" id="contacto">
+      <div class="bg-inverse-surface text-inverse-on-surface rounded-3xl p-6 md:p-12 relative overflow-hidden shadow-[0_20px_48px_rgba(31,59,56,0.2)]">
+        <div class="absolute -left-10 -bottom-10 opacity-10 pointer-events-none" aria-hidden="true">
+          <svg fill="currentColor" height="240" viewBox="0 0 160 120" width="320">
+            <rect height="20" width="20" x="70" y="20"></rect>
+            <rect height="20" width="60" x="50" y="40"></rect>
+            <rect height="20" width="100" x="30" y="60"></rect>
+            <rect height="20" width="140" x="10" y="80"></rect>
+            <rect height="20" width="20" x="70" y="100"></rect>
+          </svg>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+
+          <!-- Texto y canales -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+              <span>Piloto gratuito</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-surface-bright font-bold tracking-tight">
+              Pruébalo 30 días gratis en tu empresa
+            </h2>
+            <p class="font-body-md text-inverse-on-surface/80 leading-relaxed">
+              Instalamos C-PhishTrapper en 3 buzones de tu equipo de pagos. Al final te entregamos un reporte con cada correo sospechoso que recibió tu empresa.
+            </p>
+
+            <div class="grid gap-3 pt-4">
+              <a class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest/5 hover:bg-surface-container-lowest/10 transition-colors" href="#contacto">
+                <span class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px]">chat</span></span>
+                <span>
+                  <span class="block font-semibold text-surface-bright">WhatsApp: 222 000 0000</span>
+                  <span class="block text-xs text-inverse-on-surface/60">Número de ejemplo · Respuesta el mismo día hábil</span>
+                </span>
+              </a>
+              <a class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest/5 hover:bg-surface-container-lowest/10 transition-colors" href="#contacto">
+                <span class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px]">mail</span></span>
+                <span>
+                  <span class="block font-semibold text-surface-bright">hola@cphishtrapper.mx</span>
+                  <span class="block text-xs text-inverse-on-surface/60">Correo de ejemplo · Facturación y soporte</span>
+                </span>
+              </a>
+              <a class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest/5 hover:bg-surface-container-lowest/10 transition-colors" href="#contacto">
+                <span class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px]">location_on</span></span>
+                <span>
+                  <span class="block font-semibold text-surface-bright">Puebla, Puebla</span>
+                  <span class="block text-xs text-inverse-on-surface/60">Demos en persona en la zona metropolitana</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Formulario -->
+          <form class="lg:col-span-7 bg-surface-container-lowest text-on-surface rounded-2xl p-6 md:p-8 shadow-[0_24px_48px_rgba(0,0,0,0.25)] space-y-4" id="lead-form">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-primary font-bold">Solicita tu piloto gratuito</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Te contactamos en menos de 24 horas para agendar la instalación.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="nombre">Nombre</label>
+                <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="nombre" name="nombre" placeholder="Ricardo Pérez" required>
+              </div>
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="empresa">Empresa</label>
+                <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="empresa" name="empresa" placeholder="Nombre de tu empresa" required>
+              </div>
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="buzones">Buzones de correo</label>
+                <select class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="buzones" name="buzones">
+                  <option>Menos de 11</option>
+                  <option selected>11 a 15</option>
+                  <option>16 a 50</option>
+                  <option>Más de 50</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="proveedor">Tu correo usa</label>
+                <select class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="proveedor" name="proveedor">
+                  <option>Gmail / Google Workspace</option>
+                  <option>Outlook / Microsoft 365</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="correo">Correo</label>
+                <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="correo" name="correo" type="email" placeholder="tu@empresa.com" required>
+              </div>
+              <div>
+                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="whatsapp">WhatsApp</label>
+                <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="whatsapp" name="whatsapp" type="tel" placeholder="222 000 0000">
+              </div>
+            </div>
+
+            <label class="flex items-start gap-2.5 text-body-sm text-on-surface-variant">
+              <input class="mt-0.5 rounded text-primary focus:ring-primary" type="checkbox" name="consentimiento" required>
+              Acepto el aviso de privacidad y que me contacten por WhatsApp o correo.
+            </label>
+
+            <button class="w-full py-4 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_6px_20px_rgba(252,143,142,0.45)] transition-all cursor-pointer" type="submit">
+              Quiero mi piloto gratuito
+            </button>
+
+            <div class="hidden p-3 rounded-lg bg-secondary-container/40 text-on-secondary-container text-body-sm font-semibold flex items-center gap-2" id="ok" role="status">
+              <span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+              <span>¡Gracias! Es un mockup: en la versión real, aquí se registraría tu solicitud.</span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Separador decorativo -->
+    <div class="w-full overflow-hidden py-4 opacity-75" aria-hidden="true">
+      <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex justify-center items-center gap-3 text-primary-container">
+        <span class="w-3 h-1 bg-current rounded-full"></span>
+        <span class="w-8 h-1 bg-current rounded-full"></span>
+        <span class="w-16 h-1 bg-current rounded-full"></span>
+        <span class="material-symbols-outlined text-[20px] text-primary">phishing</span>
+        <span class="w-16 h-1 bg-current rounded-full"></span>
+        <span class="w-8 h-1 bg-current rounded-full"></span>
+        <span class="w-3 h-1 bg-current rounded-full"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================== BOTÓN VOLVER ARRIBA ===================== -->
+  <button class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-primary text-on-primary shadow-[0_4px_16px_rgba(62,101,96,0.35)] opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:bg-on-primary-container flex items-center justify-center cursor-pointer" id="back-to-top" type="button" aria-label="Volver arriba">
+    <span class="material-symbols-outlined text-[24px]">arrow_upward</span>
+  </button>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="w-full bg-surface-container-low text-on-surface-variant py-space-xl mt-space-xl">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-space-xl pb-space-lg">
+        <div class="space-y-space-md max-w-sm">
+          <div class="flex items-center gap-space-sm">
+            <img alt="" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP_zgi2jahOwnGd-IqKpouxinrzJaBG8N97muq5pjlkmPsXg8Wj5JZiopC_n0tadpTLQQKepccyInt5guBs0FGyqYBTZwPHw1dvVuhCQV8yiH9rWhUst4gaMnimsymNQKNPJGucVEsi-wwuckHVw73H4j7FubkNfcTUuF09xZMpeOTYCcVwmQsITWRvBCZwavumcAjcjiz5DvcYEQDYiJjvfLqeWi4bIgIUvaOT2OFyY9q1TTKimVgaIPAj1FmME7O8g">
+            <span class="font-headline-sm text-body-lg text-primary tracking-tight font-bold">C-PhishTrapper</span>
+          </div>
+          <p class="font-body-sm text-body-sm leading-relaxed">
+            Semáforo antifraude y expediente de reclamación para PYMEs mexicanas, encima del correo que ya usas.
+          </p>
+        </div>
+
+        <ul class="flex flex-wrap gap-x-space-lg gap-y-space-sm font-body-sm text-body-sm">
+          <li><a class="hover:text-primary transition-colors" href="#como-funciona">Cómo funciona</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#expediente">Expediente</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#precios">Precios</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#preguntas">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="pt-space-lg border-t border-outline-variant/30 flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm">
+        <p>© 2026 C-PhishTrapper · Proyecto de emprendimiento</p>
+        <div class="flex items-center gap-space-md">
+          <a class="hover:text-primary transition-colors" href="#contacto">Aviso de privacidad</a>
+          <span class="text-outline-variant">•</span>
+          <a class="hover:text-primary transition-colors" href="#contacto">Términos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

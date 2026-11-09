@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C-PhishTrapper | Atrapa el phishing antes de que te atrape a ti</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap">
+
+  <!-- Tailwind (CDN) + configuración del tema -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind.config.js"></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Lógica de la página -->
+  <script src="js/main.js" defer></script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(31,59,56,0.06)]">
+    <div class="h-20 max-w-7xl mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
+      <a class="flex items-center gap-space-sm cursor-pointer group" href="#inicio">
+        <img alt="C-PhishTrapper Logo" class="w-9 h-9 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDta4TVkrCLzK5ufkOxEOCs7JrywDkAiugcBOWuokreh5kh_XL98UhqI_CDUTj03fsKJl6ieyLnUMPhgIVqGhJ1CA9vbUEEVdeDpJaSi2fXxNcwZDXy78KXZ3syzqXv2CZ8leeHghlpwzUOYZUo8EteUVNTAb2Xg-JDoY95Bduotxo3oFtguD-Y2szvciL2spsxQ-CiGTyfWkG32tU6A8NYHdy12y1nQQ1VXOzIdw1SPpV6dYEcPmYad_DQekYRy_-_zQ">
+        <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold group-hover:opacity-90">C-PhishTrapper</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-space-lg">
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#caracteristicas">Características</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#como-funciona">Cómo funciona</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#planes">Planes</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-space-md">
+        <button class="open-modal-btn hidden sm:inline-flex items-center justify-center px-space-lg py-space-sm bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-semibold rounded-full shadow-[0_4px_14px_rgba(252,143,142,0.35)] transition-all duration-200 hover:shadow-none cursor-pointer" type="button" data-plan="Prueba Gratuita (14 días)">
+          Instalar prueba gratis
+        </button>
+        <img alt="Perfil" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_4px_rgba(0,0,0,0.12)] border border-primary-container/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVi1OB9sPRaburRY6EOl0PojyQ1k02eJjRyWMawdVT8h2Nq7BARK6UsxKH_LCuG8oz1a00Fw5jxklXhyNm9nBZsoa5u6iQOS_SG_xna_NzwDMUmX9mL8zLpHiHo4nKq8pMWpXA4N92fYRwe_HpR7fJ2ZBAbd_jwKm094iKskoj7562PAd-bFUqQEblRelJUEDlirFiUPZ9LkokVRt1C21PB_yvlvE0F0k7jXfAjgx__HwBAizvP31GZ1MDwGgAQLHZpg">
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
+    <div class="flex flex-col w-full font-body-md text-on-surface">
+
+      <!-- ===================== HERO ===================== -->
+      <section class="relative w-full overflow-hidden bg-surface py-12 md:py-20 lg:py-24" id="inicio">
+        <!-- Capas decorativas -->
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary/5 via-transparent to-primary/10"></div>
+        <div class="absolute -top-32 right-1/4 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+
+            <!-- Columna izquierda: texto y CTAs -->
+            <div class="lg:col-span-7 space-y-space-lg">
+              <div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container text-label-sm font-label-sm uppercase tracking-widest shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                Seguridad Heurística Tranquila • v2.4 Activa
+              </div>
+
+              <h1 class="font-display text-headline-lg-mobile md:text-display tracking-tight text-primary leading-tight font-extrabold">
+                Atrapa el phishing <br class="hidden sm:block">
+                <span class="text-tertiary-container relative inline-block">
+                  antes de que te atrape
+                  <svg class="absolute -bottom-2 left-0 w-full h-2.5 text-tertiary/30" preserveAspectRatio="none" viewBox="0 0 100 12" aria-hidden="true">
+                    <path d="M0,5 Q25,12 50,5 T100,6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
+                  </svg>
+                </span> a ti.
+              </h1>
+
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                Un agente de inteligencia artificial integrado en tu navegador que analiza tus correos en tiempo real, bloqueando amenazas y enlaces maliciosos sin interrumpir tu tranquilidad.
+              </p>
+
+              <div class="flex flex-wrap items-center gap-space-md pt-2">
+                <button class="open-modal-btn inline-flex items-center justify-center gap-space-xs px-8 py-4 bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-md font-bold rounded-full shadow-[0_6px_20px_rgba(252,143,142,0.4)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer" type="button" data-plan="Prueba Gratuita (14 días)">
+                  <span>Comenzar prueba gratis</span>
+                  <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </button>
+                <a class="inline-flex items-center justify-center gap-space-xs px-7 py-4 bg-primary-container/30 hover:bg-primary-container/50 text-on-primary-container font-headline-sm text-body-md font-semibold rounded-full shadow-sm transition-all duration-200" href="#como-funciona">
+                  <span class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
+                  <span>Ver cómo funciona</span>
+                </a>
+              </div>
+
+              <div class="flex items-center gap-6 pt-4 text-on-surface-variant">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+                  <span class="font-body-sm text-body-sm font-medium">Instalación en 1 clic</span>
+                </div>
+                <span class="text-outline-variant">•</span>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[20px]">lock_reset</span>
+                  <span class="font-body-sm text-body-sm font-medium">100% Sin rastreo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Columna derecha: ilustración + tarjeta de alerta -->
+            <div class="lg:col-span-5 relative">
+              <div class="relative w-full rounded-2xl bg-surface-container-low p-4 shadow-[0_12px_32px_rgba(31,59,56,0.08)] overflow-hidden">
+
+                <div class="hero-art w-full h-56 rounded-xl overflow-hidden relative shadow-inner" role="img" aria-label="Lago en pixel art con un pescador al amanecer">
+                  <div class="absolute bottom-2 left-3 px-2.5 py-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-code-badge text-code-badge flex items-center gap-1.5 backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                    <span>LAGO_SEGURO // LATENCIA: 0ms</span>
+                  </div>
+                </div>
+
+                <div class="relative -mt-10 mx-2 bg-surface-container-lowest rounded-xl p-5 shadow-[0_12px_28px_rgba(31,59,56,0.12)]">
+                  <div class="flex items-center justify-between pb-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-bold shadow-sm">
+                      <span class="material-symbols-outlined text-[16px] text-tertiary">warning</span>
+                      <span>Intento de phishing detectado</span>
+                    </div>
+                    <span class="font-code-badge text-code-badge text-outline">#TRAP-9042</span>
+                  </div>
+
+                  <div class="bg-surface-container-low rounded-lg p-3 space-y-2 text-body-sm">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary">
+                          <span class="material-symbols-outlined text-[14px]">mail</span>
+                        </div>
+                        <span class="font-semibold text-on-surface text-body-sm">soporte@banco-verificaci0n.com</span>
+                      </div>
+                      <span class="text-tertiary font-label-sm text-label-sm font-semibold">BLOQUEADO</span>
+                    </div>
+                    <p class="text-on-surface-variant font-body-sm text-xs line-clamp-1">
+                      "Urgente: confirme su contraseña antes de las 18:00 para evitar..."
+                    </p>
+                    <div class="px-2.5 py-1 bg-surface-variant rounded text-xs font-label-sm text-outline flex items-center justify-between">
+                      <span class="truncate">https://secure-login.suspicious-node.net/auth</span>
+                      <span class="text-tertiary font-bold ml-2">Enlace Neutralizado</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-3 pt-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                      <span class="font-body-sm text-xs text-on-surface-variant">Bandeja de entrada protegida</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-xs font-semibold text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">verified_user</span>
+                      <span>Certificado Seguro</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== MÉTRICAS ===================== -->
+      <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin -mt-4 mb-16 relative z-20">
+        <div class="bg-inverse-surface text-inverse-on-surface rounded-2xl p-6 md:p-8 shadow-[0_16px_36px_rgba(31,59,56,0.16)]">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-outline/20">
+            <div class="text-center pt-2 md:pt-0">
+              <div class="font-display text-headline-lg font-bold text-secondary-container">+99.8%</div>
+              <div class="font-body-sm text-body-sm text-inverse-on-surface/80 mt-1">Precisión en detección</div>
+            </div>
+            <div class="text-center pt-4 md:pt-0 md:pl-6">
+              <div class="font-display text-headline-lg font-bold text-primary-fixed">10+ horas</div>
+              <div class="font-body-sm text-body-sm text-inverse-on-surface/80 mt-1">Ahorradas por usuario / mes</div>
+            </div>
+            <div class="text-center pt-4 md:pt-0 md:pl-6">
+              <div class="font-display text-headline-lg font-bold text-secondary-container">0 ms</div>
+              <div class="font-body-sm text-body-sm text-inverse-on-surface/80 mt-1">Impacto de latencia web</div>
+            </div>
+            <div class="text-center pt-4 md:pt-0 md:pl-6">
+              <div class="font-display text-headline-lg font-bold text-primary-fixed">100%</div>
+              <div class="font-body-sm text-body-sm text-inverse-on-surface/80 mt-1">Privacidad sin almacenamiento</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CARACTERÍSTICAS ===================== -->
+      <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-12 md:py-16" id="caracteristicas">
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">nature</span>
+            <span>Protección sin fricción</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">
+            Vigilancia silenciosa creada para tu día a día
+          </h2>
+          <p class="font-body-md text-on-surface-variant">
+            La tranquilidad de un lago apacible combinada con motores heurísticos de vanguardia.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+          <!-- Característica 1 -->
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">search_check</span>
+              </div>
+              <div class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">01 / Heurística</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Detección avanzada</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+                Escaneo profundo de encabezados, enlaces ofuscados y remitentes falsificados con precisión milimétrica antes de que interactúes con ellos.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 flex items-center gap-2 text-xs font-label-sm text-primary font-bold">
+              <span>INSPECCIÓN EN TIEMPO REAL</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+            </div>
+          </div>
+
+          <!-- Característica 2 -->
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">neurology</span>
+              </div>
+              <div class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">02 / Inteligencia Adaptativa</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Agente de IA que aprende</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+                Adapta sus patrones de defensa aprendiendo constantemente de cada nuevo vector de ataque global sin comprometer ni un solo bit de tu privacidad.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 flex items-center gap-2 text-xs font-label-sm text-primary font-bold">
+              <span>MODELOS LOCALES EN NAVEGADOR</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+            </div>
+          </div>
+
+          <!-- Característica 3 -->
+          <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-[0_4px_16px_rgba(31,59,56,0.06)] hover:shadow-[0_12px_28px_rgba(31,59,56,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-6 shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">support_agent</span>
+              </div>
+              <div class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">03 / Factor Humano</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">Soporte 24/7</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed">
+                Asistencia técnica continua y análisis de correos dudosos por analistas certificados en ciberseguridad cuando necesitas una confirmación experta.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 flex items-center gap-2 text-xs font-label-sm text-primary font-bold">
+              <span>TIEMPO RESPUESTA &lt; 5 MIN</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CÓMO FUNCIONA ===================== -->
+      <section class="w-full bg-surface-container-low py-16 md:py-24" id="como-funciona">
+        <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+                <span>Fácil y Transparente</span>
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">
+                ¿Cómo funciona C-PhishTrapper?
+              </h2>
+            </div>
+            <p class="font-body-md text-on-surface-variant max-w-md">
+              Sin configuraciones complejas en servidores de correo. Simplicidad absoluta desde tu propio navegador.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg relative">
+            <!-- Paso 1 -->
+            <div class="bg-surface rounded-2xl p-8 shadow-sm relative">
+              <div class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-headline-sm mb-6">1</div>
+              <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">Instala la extensión</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed mb-6">
+                Añade C-PhishTrapper a Chrome, Firefox o Edge en un solo clic desde la tienda oficial. Compatible al instante con Gmail, Outlook y webmail.
+              </p>
+              <div class="flex items-center gap-3 pt-2 text-outline text-xs font-label-sm">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Chrome</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Firefox</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Edge</span>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="bg-surface rounded-2xl p-8 shadow-sm relative">
+              <div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-headline-sm mb-6">2</div>
+              <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">El agente analiza tus correos</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed mb-6">
+                La IA inspecciona silenciosamente en segundo plano tus bandejas de entrada, evaluando la reputación de dominios, encabezados DKIM y textos persuasivos sospechosos.
+              </p>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-container text-xs font-label-sm text-primary">
+                <span class="material-symbols-outlined text-[14px]">memory</span>
+                <span>Zero-Knowledge Encryption</span>
+              </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="bg-surface rounded-2xl p-8 shadow-sm relative">
+              <div class="w-12 h-12 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-headline-sm mb-6">3</div>
+              <h3 class="font-headline-sm text-body-lg font-bold text-on-surface mb-2">Recibe alertas y bloqueo activo</h3>
+              <p class="font-body-md text-body-sm text-on-surface-variant leading-relaxed mb-6">
+                Notificaciones visuales inmediatas en colores suaves y desarmado automático de enlaces fraudulentos antes de que un clic ponga en riesgo tu equipo.
+              </p>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-tertiary-fixed/30 text-xs font-label-sm text-tertiary">
+                <span class="material-symbols-outlined text-[14px]">shield</span>
+                <span>Escudo de clic preventivo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PLANES Y PRECIOS ===================== -->
+      <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24" id="planes">
+        <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+            <span>Transparencia y Calma</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">
+            Elige tu plan de tranquilidad
+          </h2>
+          <p class="font-body-md text-on-surface-variant">
+            Comienza con nuestra prueba gratuita de 14 días. Sin tarjeta requerida. Cancela cuando quieras.
+          </p>
+
+          <!-- Interruptor mensual / anual -->
+          <div class="pt-4 flex items-center justify-center gap-3">
+            <span class="font-body-sm text-body-sm font-bold text-primary transition-colors" id="label-monthly">Facturación Mensual</span>
+            <button class="relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-surface-variant transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" id="billing-toggle" role="switch" type="button" aria-checked="false" aria-label="Facturación anual">
+              <span class="pointer-events-none inline-block h-6 w-6 transform rounded-full bg-primary shadow ring-0 transition duration-200 ease-in-out translate-x-0" id="billing-toggle-dot"></span>
+            </button>
+            <div class="flex items-center gap-2">
+              <span class="font-body-sm text-body-sm text-on-surface-variant transition-colors" id="label-annual">Facturación Anual</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-code-badge text-code-badge font-bold text-xs">-20% dto.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch">
+
+          <!-- Plan Personal -->
+          <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Personal</h3>
+                <span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant">Individual</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant mb-6">Para profesionales independientes y personas que valoran una navegación sin sobresaltos.</p>
+              <div class="flex items-baseline gap-1 mb-8">
+                <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-annual="$56" data-monthly="$70">$70</span>
+                <span class="plan-period text-on-surface-variant font-body-sm">/mes</span>
+              </div>
+              <ul class="space-y-3.5 mb-8 text-body-sm text-on-surface-variant">
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>1 usuario individual</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>1 cuenta de correo integrada</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Detección heurística con IA</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Alertas en tiempo real</span></li>
+                <li class="flex items-center gap-2.5 text-outline"><span class="material-symbols-outlined text-[18px]">remove</span><span>Panel de administrador de equipo</span></li>
+              </ul>
+            </div>
+            <button class="open-modal-btn w-full py-3.5 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_4px_14px_rgba(252,143,142,0.3)] transition-all cursor-pointer" type="button" data-plan="Plan Personal">
+              Contratar Personal
+            </button>
+          </div>
+
+          <!-- Plan Equipo (destacado) -->
+          <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-[0_12px_36px_rgba(62,101,96,0.18)] relative flex flex-col justify-between transform lg:-translate-y-3">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider shadow-sm">
+              Más Popular
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-4 mt-2">
+                <h3 class="font-headline-sm text-headline-sm text-primary font-bold">Equipo</h3>
+                <span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-semibold">Pequeñas Empresas</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant mb-6">Defensa coordinada para equipos de trabajo que comparten información sensible a diario.</p>
+              <div class="flex items-baseline gap-1 mb-8">
+                <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-annual="$152" data-monthly="$190">$190</span>
+                <span class="plan-period text-on-surface-variant font-body-sm">/mes</span>
+              </div>
+              <ul class="space-y-3.5 mb-8 text-body-sm text-on-surface-variant">
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span class="font-semibold text-on-surface">Hasta 5 usuarios</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Panel de control de administrador</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Reportes de correos bloqueados</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Soporte prioritario por chat</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Políticas centralizadas anti-phishing</span></li>
+              </ul>
+            </div>
+            <button class="open-modal-btn w-full py-4 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_6px_20px_rgba(252,143,142,0.45)] transition-all cursor-pointer" type="button" data-plan="Plan Equipo">
+              Contratar Equipo
+            </button>
+          </div>
+
+          <!-- Plan Empresa -->
+          <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Empresa</h3>
+                <span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant">Corporativo</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant mb-6">Para organizaciones que necesitan cumplimiento estricto, auditorías e integraciones a medida.</p>
+              <div class="flex items-baseline gap-1 mb-8">
+                <span class="plan-price font-display text-headline-lg font-extrabold text-primary" data-annual="$360" data-monthly="$450">$450</span>
+                <span class="plan-period text-on-surface-variant font-body-sm">/mes</span>
+              </div>
+              <ul class="space-y-3.5 mb-8 text-body-sm text-on-surface-variant">
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span class="font-semibold text-on-surface">Hasta 20 usuarios (ampliable)</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Gestión avanzada de permisos y SSO</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Reportes de auditoría y cumplimiento</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>Soporte 24/7 con analista dedicado</span></li>
+                <li class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>API y webhooks para SIEM</span></li>
+              </ul>
+            </div>
+            <button class="open-modal-btn w-full py-3.5 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_4px_14px_rgba(252,143,142,0.3)] transition-all cursor-pointer" type="button" data-plan="Plan Empresa">
+              Contratar Empresa
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================== TESTIMONIO ===================== -->
+      <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin mb-16">
+        <div class="bg-inverse-surface text-inverse-on-surface rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_20px_48px_rgba(31,59,56,0.2)]">
+          <!-- Pino pixel art decorativo -->
+          <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none" aria-hidden="true">
+            <svg fill="currentColor" height="240" viewBox="0 0 160 120" width="320">
+              <rect height="20" width="20" x="70" y="20"></rect>
+              <rect height="20" width="60" x="50" y="40"></rect>
+              <rect height="20" width="100" x="30" y="60"></rect>
+              <rect height="20" width="140" x="10" y="80"></rect>
+              <rect height="20" width="20" x="70" y="100"></rect>
+            </svg>
+          </div>
+
+          <div class="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div class="relative shrink-0">
+              <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg border-2 border-primary-container/40">
+                <img class="w-full h-full object-cover" alt="Retrato de Carlos Mendoza, Director de Operaciones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD86SZCUyFmgdJGT4mfYjfjjAGrBrTo8Vb-cbF3PzKKdp5dO2Ce3buwIfhdfKSv5zKvpx62xLjlrG3s0Yev2UQ65KZdtygpX5YF2hhnLRxBcdzvmlYTxcnpuH36eQCs7WrpWsoh9QHKdCCsDJbnLUC426VEKM7ZlSCn6Me7hBMEUOhM7HWxWrR0InYqCyy6vkgBbPqYjJaDVF6wyMCgtm6BIX7i3FDoeVMLX9pnDEw0mHqOTiTAoiVk">
+              </div>
+              <div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-md">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-center md:text-left">
+              <div class="flex items-center justify-center md:justify-start gap-1 text-secondary-container" aria-label="5 de 5 estrellas">
+                <span class="material-symbols-outlined icon-filled text-[20px]">star</span>
+                <span class="material-symbols-outlined icon-filled text-[20px]">star</span>
+                <span class="material-symbols-outlined icon-filled text-[20px]">star</span>
+                <span class="material-symbols-outlined icon-filled text-[20px]">star</span>
+                <span class="material-symbols-outlined icon-filled text-[20px]">star</span>
+                <span class="ml-2 font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Cliente Verificado</span>
+              </div>
+              <blockquote class="font-headline-sm text-headline-sm md:text-headline-md text-surface-bright font-semibold leading-snug">
+                “Ahorramos más de 10 horas al mes. Defensa impecable contra el phishing y total tranquilidad para todo nuestro equipo.”
+              </blockquote>
+              <div class="text-inverse-on-surface/80 font-body-md text-body-sm">
+                <span class="font-bold text-surface-bright">Carlos Mendoza</span> — Director de Operaciones en NovaLogistics
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== FAQ + CONTACTO ===================== -->
+      <section class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-12 md:py-16" id="contacto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+
+          <!-- Preguntas frecuentes -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm uppercase tracking-wider mb-2">
+              <span class="material-symbols-outlined text-[15px]">help_center</span>
+              <span>Preguntas Frecuentes</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary font-bold tracking-tight mb-6">
+              Respuestas claras, sin letras pequeñas
+            </h2>
+
+            <div class="space-y-3" id="faq-accordion">
+              <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm transition-all duration-200">
+                <button class="faq-btn w-full text-left p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary" type="button" aria-expanded="false">
+                  <span>¿Cómo analiza mis correos sin violar mi privacidad?</span>
+                  <span class="material-symbols-outlined faq-icon transition-transform duration-300 text-primary">expand_more</span>
+                </button>
+                <div class="faq-content hidden px-5 pb-5 pt-0 text-on-surface-variant font-body-sm leading-relaxed border-t border-surface-container/50">
+                  C-PhishTrapper procesa las cabeceras y textos sospechosos de forma 100% local en tu navegador mediante micro-modelos heurísticos. Jamás almacenamos, enviamos ni entrenamos con el contenido de tus correos en servidores externos.
+                </div>
+              </div>
+
+              <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm transition-all duration-200">
+                <button class="faq-btn w-full text-left p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary" type="button" aria-expanded="false">
+                  <span>¿Afecta la velocidad o latencia de mi navegador?</span>
+                  <span class="material-symbols-outlined faq-icon transition-transform duration-300 text-primary">expand_more</span>
+                </button>
+                <div class="faq-content hidden px-5 pb-5 pt-0 text-on-surface-variant font-body-sm leading-relaxed border-t border-surface-container/50">
+                  No. Su arquitectura ligera de 0 ms en WebAssembly corre en hilos paralelos aislados, garantizando una carga instantánea de tus aplicaciones de correo sin retrasos.
+                </div>
+              </div>
+
+              <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm transition-all duration-200">
+                <button class="faq-btn w-full text-left p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary" type="button" aria-expanded="false">
+                  <span>¿Puedo cancelar o cambiar de plan en cualquier momento?</span>
+                  <span class="material-symbols-outlined faq-icon transition-transform duration-300 text-primary">expand_more</span>
+                </button>
+                <div class="faq-content hidden px-5 pb-5 pt-0 text-on-surface-variant font-body-sm leading-relaxed border-t border-surface-container/50">
+                  Sí, puedes pausar o cancelar tu suscripción con un solo clic desde tu panel sin contratos de permanencia ni penalizaciones.
+                </div>
+              </div>
+
+              <div class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm transition-all duration-200">
+                <button class="faq-btn w-full text-left p-5 flex items-center justify-between gap-4 font-headline-sm text-body-md font-bold text-on-surface hover:text-primary" type="button" aria-expanded="false">
+                  <span>¿Es compatible con clientes de correo corporativo?</span>
+                  <span class="material-symbols-outlined faq-icon transition-transform duration-300 text-primary">expand_more</span>
+                </button>
+                <div class="faq-content hidden px-5 pb-5 pt-0 text-on-surface-variant font-body-sm leading-relaxed border-t border-surface-container/50">
+                  C-PhishTrapper se integra a la perfección con Google Workspace, Microsoft Outlook 365, Zoho Mail y cualquier cliente webmail estándar en Chrome, Brave, Firefox y Edge.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de contacto -->
+          <div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-low rounded-2xl p-8 border border-outline-variant/30 shadow-sm">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider mb-4">
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                <span>Contacto Directo</span>
+              </div>
+              <h3 class="font-headline-sm text-headline-sm text-primary font-bold mb-3">
+                ¿Tienes dudas o necesitas un despliegue a medida?
+              </h3>
+              <p class="font-body-sm text-on-surface-variant leading-relaxed mb-6">
+                Escríbenos directamente o agenda una demostración en vivo con nuestro equipo de seguridad heurística.
+              </p>
+
+              <form class="space-y-4" id="contact-form">
+                <div>
+                  <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="contact-email">Correo Electrónico</label>
+                  <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="contact-email" name="email" type="email" placeholder="tu.nombre@empresa.com" required>
+                </div>
+                <div>
+                  <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="contact-message">Mensaje o Consulta</label>
+                  <textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all resize-none" id="contact-message" name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte a proteger tu equipo?" required></textarea>
+                </div>
+                <button class="w-full py-3.5 px-6 rounded-full bg-primary hover:bg-on-primary-container text-on-primary font-headline-sm text-body-sm font-bold text-center shadow-md transition-all cursor-pointer" id="contact-submit-btn" type="submit">
+                  Enviar Consulta
+                </button>
+                <div class="hidden p-3 rounded-lg bg-secondary-container/40 text-on-secondary-container text-body-sm font-semibold flex items-center gap-2" id="contact-feedback">
+                  <span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+                  <span>¡Mensaje recibido! Nos comunicaremos en menos de 2 horas.</span>
+                </div>
+              </form>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-outline text-xs font-label-sm">
+              <span>soporte@c-phishtrapper.com</span>
+              <span>Respuesta promedio: 5 min</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Separador decorativo -->
+      <div class="w-full overflow-hidden py-4 opacity-75" aria-hidden="true">
+        <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex justify-center items-center gap-3 text-primary-container">
+          <span class="w-3 h-1 bg-current rounded-full"></span>
+          <span class="w-8 h-1 bg-current rounded-full"></span>
+          <span class="w-16 h-1 bg-current rounded-full"></span>
+          <span class="material-symbols-outlined text-[20px] text-primary">phishing</span>
+          <span class="w-16 h-1 bg-current rounded-full"></span>
+          <span class="w-8 h-1 bg-current rounded-full"></span>
+          <span class="w-3 h-1 bg-current rounded-full"></span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===================== BOTÓN VOLVER ARRIBA ===================== -->
+  <button class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-primary text-on-primary shadow-[0_4px_16px_rgba(62,101,96,0.35)] opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:bg-on-primary-container flex items-center justify-center cursor-pointer" id="back-to-top" type="button" aria-label="Volver arriba">
+    <span class="material-symbols-outlined text-[24px]">arrow_upward</span>
+  </button>
+
+  <!-- ===================== MODAL DE INSTALACIÓN ===================== -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-inverse-surface/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="action-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="relative w-full max-w-lg bg-surface-container-lowest rounded-3xl p-6 md:p-8 shadow-[0_24px_48px_rgba(31,59,56,0.2)] transform transition-transform duration-300 scale-95 border border-outline-variant/30" id="modal-card">
+      <button class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer" id="close-modal-btn" type="button" aria-label="Cerrar modal">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Vista: formulario -->
+      <div id="modal-form-view">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shadow-sm">
+            <span class="material-symbols-outlined text-[26px]">verified_user</span>
+          </div>
+          <div>
+            <span class="font-code-badge text-code-badge px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container uppercase" id="modal-plan-badge">14 DÍAS GRATIS</span>
+            <h3 class="font-headline-sm text-headline-sm text-primary font-bold" id="modal-title">Activar C-PhishTrapper</h3>
+          </div>
+        </div>
+        <p class="font-body-sm text-on-surface-variant mb-6">
+          Protege tu bandeja de entrada de forma inmediata. Compatible al 100% con Chrome, Firefox y Microsoft Edge.
+        </p>
+
+        <form class="space-y-4" id="modal-quick-form">
+          <div>
+            <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 font-semibold" for="modal-email">Correo de Registro</label>
+            <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-sm transition-all" id="modal-email" name="email" type="email" placeholder="tu.correo@empresa.com" required>
+          </div>
+          <fieldset class="pt-1">
+            <legend class="block font-label-sm text-label-sm text-on-surface-variant mb-2 font-semibold">Selecciona tu navegador principal</legend>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="cursor-pointer border border-outline-variant/60 rounded-xl p-3 flex flex-col items-center gap-1 hover:border-primary transition-all text-center">
+                <input class="accent-primary" name="browser" type="radio" value="chrome" checked>
+                <span class="font-label-sm text-label-sm font-semibold text-on-surface">Chrome</span>
+              </label>
+              <label class="cursor-pointer border border-outline-variant/60 rounded-xl p-3 flex flex-col items-center gap-1 hover:border-primary transition-all text-center">
+                <input class="accent-primary" name="browser" type="radio" value="firefox">
+                <span class="font-label-sm text-label-sm font-semibold text-on-surface">Firefox</span>
+              </label>
+              <label class="cursor-pointer border border-outline-variant/60 rounded-xl p-3 flex flex-col items-center gap-1 hover:border-primary transition-all text-center">
+                <input class="accent-primary" name="browser" type="radio" value="edge">
+                <span class="font-label-sm text-label-sm font-semibold text-on-surface">Edge</span>
+              </label>
+            </div>
+          </fieldset>
+          <button class="w-full mt-4 py-4 px-6 rounded-full bg-tertiary-container hover:bg-tertiary text-on-tertiary font-headline-sm text-body-sm font-bold text-center shadow-[0_6px_20px_rgba(252,143,142,0.45)] transition-all cursor-pointer" type="submit">
+            Descargar Extensión y Comenzar
+          </button>
+        </form>
+      </div>
+
+      <!-- Vista: éxito -->
+      <div class="hidden text-center py-6 space-y-4" id="modal-success-view">
+        <div class="w-16 h-16 rounded-full bg-secondary-container mx-auto flex items-center justify-center text-on-secondary-container shadow-md">
+          <span class="material-symbols-outlined text-[36px]">cloud_download</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-primary font-bold">¡Descarga Iniciada!</h3>
+        <p class="font-body-sm text-on-surface-variant max-w-sm mx-auto">
+          Tu prueba gratuita de 14 días ha sido activada con éxito. Revisa tus descargas para completar la instalación del agente silencioso.
+        </p>
+        <div class="pt-2">
+          <button class="px-8 py-3 rounded-full bg-primary hover:bg-on-primary-container text-on-primary font-headline-sm text-body-sm font-bold shadow-md transition-all cursor-pointer" id="modal-finish-btn" type="button">
+            Entendido, gracias
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="w-full bg-surface-container-low text-on-surface-variant py-space-xl mt-space-xl">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl pb-space-xl">
+
+        <div class="space-y-space-md md:col-span-1">
+          <div class="flex items-center gap-space-sm">
+            <img alt="C-PhishTrapper Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP_zgi2jahOwnGd-IqKpouxinrzJaBG8N97muq5pjlkmPsXg8Wj5JZiopC_n0tadpTLQQKepccyInt5guBs0FGyqYBTZwPHw1dvVuhCQV8yiH9rWhUst4gaMnimsymNQKNPJGucVEsi-wwuckHVw73H4j7FubkNfcTUuF09xZMpeOTYCcVwmQsITWRvBCZwavumcAjcjiz5DvcYEQDYiJjvfLqeWi4bIgIUvaOT2OFyY9q1TTKimVgaIPAj1FmME7O8g">
+            <span class="font-headline-sm text-body-lg text-primary tracking-tight font-bold">C-PhishTrapper</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Vigilancia serena y protección contra phishing basada en IA silenciosa. Navega con la tranquilidad de un lago en calma.</p>
+          <div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+            Extensión v2.4 Activa
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-headline-sm text-body-md text-on-surface font-semibold mb-space-md">Producto</h4>
+          <ul class="space-y-space-sm font-body-sm text-body-sm">
+            <li class="hover:text-primary transition-colors"><a href="#caracteristicas">Protección Silenciosa</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#caracteristicas">Análisis Heurístico</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#como-funciona">Integración con Navegadores</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#como-funciona">Registro de Amenazas</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-headline-sm text-body-md text-on-surface font-semibold mb-space-md">Recursos</h4>
+          <ul class="space-y-space-sm font-body-sm text-body-sm">
+            <li class="hover:text-primary transition-colors"><a href="#contacto">Documentación</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#contacto">Informe de Amenazas</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#contacto">Guía de Privacidad</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#contacto">Estado del Servicio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-headline-sm text-body-md text-on-surface font-semibold mb-space-md">Compañía</h4>
+          <ul class="space-y-space-sm font-body-sm text-body-sm">
+            <li class="hover:text-primary transition-colors"><a href="#inicio">Sobre Nosotros</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#planes">Políticas de Seguridad</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#planes">Términos de Servicio</a></li>
+            <li class="hover:text-primary transition-colors"><a href="#contacto">Centro de Ayuda</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm">
+        <p class="text-on-surface-variant">© 2024 C-PhishTrapper Inc. Todos los derechos reservados. Diseñado para una navegación tranquila.</p>
+        <div class="flex items-center gap-space-md text-on-surface-variant">
+          <span class="hover:text-primary transition-colors cursor-pointer">Privacidad</span>
+          <span class="text-outline-variant">•</span>
+          <span class="hover:text-primary transition-colors cursor-pointer">Cookies</span>
+          <span class="text-outline-variant">•</span>
+          <span class="hover:text-primary transition-colors cursor-pointer">Seguridad</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
